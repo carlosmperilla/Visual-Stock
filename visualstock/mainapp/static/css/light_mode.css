@@ -1,0 +1,25 @@
+:root {
+    --nav_bg_color: rgba(0, 0, 0, 0.15);
+    --nav_blur_weight: 2px;
+    --nav_color: #555;
+    --nav_color_hover: #777;
+    --interactive-icon_hover: rgb(187 147 93);
+    --date_shadow: rgb(104, 71, 0);
+    --text_color: #444; 
+    --text_color_button: #ccc;
+    --bright_button: 0.8;
+    --button_shadow: #999;
+    --button_shadow_hover: #777;
+    --modal_bg_color: rgba(168, 67, 0, 0.15);
+    --bright_modal: 0.8;
+    --modal_blur_weight: 5px;
+    --plain-panel_bg_color: #ddd;
+    --button_guests_color_layer: rgba(255, 184, 3, 0.5);
+    --button_signup_color_layer: rgba(14, 213, 77, 0.5);
+    --button_login_color_layer: rgba(107, 164, 207, 0.5);
+    --button_close_color_layer: rgba(247, 102, 41, 0.5);
+  }
+
+body {
+    background-image: url("../imgs/background_pattern_light.jpg");
+}

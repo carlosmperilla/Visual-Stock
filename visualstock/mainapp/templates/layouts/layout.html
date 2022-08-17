@@ -1,0 +1,131 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}{% endblock title %} | Visual Stock
+    </title>
+    <link rel="stylesheet" id="theme">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/icons.css' %}">
+</head>
+<body>
+    <input type="checkbox" id="display_nav">
+    <input type="checkbox" id="changeColorTheme">
+    <input type="checkbox" id="howToUse">
+    <input type="checkbox" id="contactMe">
+    <header>
+        <label for="display_nav">
+            <span class="icon-eye"></span>
+            <div class="active-hide"><span class="icon-eye-blocked"></span></div>
+        </label>
+        <label for="changeColorTheme">
+            <div class="active-hide"><span class="icon-contrast"></span></div>
+        </label>
+        <nav>
+            <ul>
+            {% if not is_index %}
+                <li>
+                    <a href="{% url 'index' %}"><span class="icon-home3"></span> Inicio</a>
+                </li>
+            {% endif %}
+            {% if user.email %}
+                <li>
+                    Stocks Creados
+                </li>
+                <li>
+                    Ver como
+                </li>
+                <li>
+                    Importar/Actualizar Imagenes
+                </li>
+                <li>
+                    <a href="{% url 'logout' %}">Cerrar Sesión</a>
+                </li>
+            {% else %}
+                <li>
+                    <a href="{% url 'signup' %}">Registrarse</a>
+                </li>
+                <li>
+                    <a href="{% url 'login' %}">Iniciar Sesión</a>
+                </li>
+            {% endif %}
+            </ul> 
+        </nav>
+        <div class="bg_navbar"></div>
+    </header>
+    <main id="content">
+        {% block content %}
+        {% endblock content %}
+    </main>
+    <footer>
+       <ul>
+            <li>
+                <label for="howToUse">
+                    ¿Cómo usar?
+                </label>
+            </li>
+            <li>
+                <label for="contactMe">
+                    Contacto
+                </label>
+                </a>
+            </li>
+        </ul>
+        <time datetime="{% now 'Y' %}">{% now 'Y' %}</time>
+    </footer>
+    <section class="modal modal__howToUse">
+        <label for="howToUse">
+            <div class="close_panel"></div>
+        </label>
+        <div class="plain_panel">
+            <label for="howToUse">
+                <div class="button__model modal__close-button"><div class="button__color-layer"></div><span class="button__text icon-close"></span><span class="button__hide-icon icon-close"></span></div>
+            </label>
+            <h2 class="section__title">¿Cómo usar?</h2>
+            <div class="section__description">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam illum, fugit excepturi adipisci odit ipsum? Ducimus, reiciendis? Atque asperiores eveniet eaque maiores quo incidunt saepe eum, excepturi perspiciatis iure deserunt?</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam illum, fugit excepturi adipisci odit ipsum? Ducimus, reiciendis? Atque asperiores eveniet eaque maiores quo incidunt saepe eum, excepturi perspiciatis iure deserunt?</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam illum, fugit excepturi adipisci odit ipsum? Ducimus, reiciendis? Atque asperiores eveniet eaque maiores quo incidunt saepe eum, excepturi perspiciatis iure deserunt?</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam illum, fugit excepturi adipisci odit ipsum? Ducimus, reiciendis? Atque asperiores eveniet eaque maiores quo incidunt saepe eum, excepturi perspiciatis iure deserunt?</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam illum, fugit excepturi adipisci odit ipsum? Ducimus, reiciendis? Atque asperiores eveniet eaque maiores quo incidunt saepe eum, excepturi perspiciatis iure deserunt?</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam illum, fugit excepturi adipisci odit ipsum? Ducimus, reiciendis? Atque asperiores eveniet eaque maiores quo incidunt saepe eum, excepturi perspiciatis iure deserunt?</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam illum, fugit excepturi adipisci odit ipsum? Ducimus, reiciendis? Atque asperiores eveniet eaque maiores quo incidunt saepe eum, excepturi perspiciatis iure deserunt?</p>
+            </div>
+            <div class="button_box">
+                <div class="interactive-buttons">
+                    <button class="button__model button__guests"><div class="button__color-layer"></div><span class="button__text">Invitados</span><span class="button__hide-icon icon-address-book"></span></button>
+                    <button class="button__model button__signup"><div class="button__color-layer"></div><span class="button__text">Registrarse</span><span class="button__hide-icon icon-user"></span></button>
+                    <button class="button__model button__login"><div class="button__color-layer"></div><span class="button__text">Iniciar Sesión</span><span class="button__hide-icon icon-enter"></span></button>            </div>
+                </div>                
+            </div>
+    </section>
+    <section class="modal modal__contactMe">
+        <label for="contactMe">
+            <div class="close_panel"></div>
+        </label>
+        <div class="plain_panel">
+            <label for="contactMe">
+                <div class="button__model modal__close-button"><div class="button__color-layer"></div><span class="button__text icon-close"></span><span class="button__hide-icon icon-close"></span></div>
+            </label>
+            <h2 class="section__title">Medios de contacto</h2>
+            <div class="section__description">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam illum, fugit excepturi adipisci odit ipsum? Ducimus, reiciendis? Atque asperiores eveniet eaque maiores quo incidunt saepe eum, excepturi perspiciatis iure deserunt?</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam illum, fugit excepturi adipisci odit ipsum? Ducimus, reiciendis? Atque asperiores eveniet eaque maiores quo incidunt saepe eum, excepturi perspiciatis iure deserunt?</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam illum, fugit excepturi adipisci odit ipsum? Ducimus, reiciendis? Atque asperiores eveniet eaque maiores quo incidunt saepe eum, excepturi perspiciatis iure deserunt?</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam illum, fugit excepturi adipisci odit ipsum? Ducimus, reiciendis? Atque asperiores eveniet eaque maiores quo incidunt saepe eum, excepturi perspiciatis iure deserunt?</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam illum, fugit excepturi adipisci odit ipsum? Ducimus, reiciendis? Atque asperiores eveniet eaque maiores quo incidunt saepe eum, excepturi perspiciatis iure deserunt?</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam illum, fugit excepturi adipisci odit ipsum? Ducimus, reiciendis? Atque asperiores eveniet eaque maiores quo incidunt saepe eum, excepturi perspiciatis iure deserunt?</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam illum, fugit excepturi adipisci odit ipsum? Ducimus, reiciendis? Atque asperiores eveniet eaque maiores quo incidunt saepe eum, excepturi perspiciatis iure deserunt?</p>
+            </div>
+    </section>
+</body>
+<script>
+    const dark_theme = "{% static '/css/dark_mode.css' %}";
+    const light_theme = "{% static '/css/light_mode.css' %}";
+</script>
+<script src="{% static 'js/interactive-icons.js'%}"></script>
+</html> 

@@ -1,0 +1,483 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+	font-size: 62.5%
+}
+
+p {
+	font-size: 1.6rem
+}
+
+a {
+    text-decoration: none;
+    color: var(--nav_color);
+}
+
+li {
+    list-style: none;
+    color: var(--nav_color);
+}
+
+body {
+    display: grid;
+    background-position: center;
+    background-repeat: repeat;
+    background-size: cover;
+    height: 100vh;
+    grid-template-areas: "header"
+                         "main"
+                         "footer";
+    grid-template-columns: 100%;
+    grid-template-rows: 10% 1fr 7%;
+}
+
+header {
+    grid-area: header;
+    display: flex;
+    width: 95vw;
+    height: 100%;
+}
+
+header > .bg_navbar {
+    position: fixed;
+    z-index: -1;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 10%;
+    transition: .5s;
+    pointer-events: none;
+    background-color: var(--nav_bg_color);
+    backdrop-filter: blur(var(--nav_blur_weight));
+}
+
+header > label {
+    display: flex;
+    align-items: center;
+    padding-right: 20px;
+    order: 1;
+}
+
+header > label > .active-hide {
+    display: flex;
+    width: 3.6rem;
+    height: 3.6rem;
+    justify-content: center;
+    align-items: center;
+}
+
+header .icon-eye, 
+header .icon-eye-blocked,
+header .icon-contrast {
+    color: var(--nav_color);
+    font-size: 3.6rem;
+}
+
+header .icon-contrast {
+    font-size: 3rem;
+}
+
+
+#changeColorTheme, 
+#display_nav,
+#howToUse,
+#contactMe {
+    display: none;
+}
+
+.icon-eye-blocked,
+#display_nav:checked ~ header > nav,
+#display_nav:checked ~ header > label > span.icon-eye {
+    visibility: hidden;
+}
+
+header .active-hide {
+    position: absolute;
+}
+
+#display_nav:checked ~ header > .bg_navbar {
+    transform: scale(0.01, 0.01);
+    visibility: hidden;
+}
+
+#display_nav:checked ~ footer {
+    transform: scaleY(0);
+    opacity: 0;
+}
+
+#display_nav:checked ~ header > label > .active-hide > .icon-eye-blocked {
+    visibility: visible;
+}
+
+#display_nav:checked ~ header > label > .active-hide {
+    visibility: visible;
+    background-color: var(--nav_bg_color);
+    box-shadow: 0px 0px var(--nav_blur_weight) 8px var(--nav_bg_color);
+    backdrop-filter: blur(var(--nav_blur_weight));
+    border-radius: 50%;
+}
+
+nav {
+    display: flex;
+    position: static;
+    padding: 0px;
+    width: 100%;
+    height: 100%;
+}
+
+nav > ul {
+    height: 100%;
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    font-size: 2.6rem;
+    font-weight: bold;
+    font-family: sans-serif, Helvetica, Arial;
+}
+
+nav > ul > li {
+    display: flex;
+    margin-left: 20px;
+    padding: 3px 10px;
+}
+
+nav > ul > li> a:hover,
+nav > ul > li:hover,
+header label:hover > .icon-eye,
+header .active-hide:hover .icon-eye-blocked,
+header .active-hide:hover .icon-contrast {
+    color: var(--nav_color_hover);
+}
+
+header label:hover > .icon-eye,
+header .active-hide:hover .icon-eye-blocked,
+header .active-hide:hover .icon-contrast {
+    animation: swing-color 1.5s ease infinite;
+    animation-direction: alternate-reverse;
+}
+
+@keyframes swing-color {
+    0% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(7deg);
+    }
+    50% {
+        transform: rotate(0deg);
+        color: var(--interactive-icon_hover);
+    }
+    75% {
+        transform: rotate(-7deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+main {
+    grid-area: main;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 25px;
+    border-radius: 20px 20px;
+    background-color: var(--nav_bg_color);
+    backdrop-filter: blur(var(--nav_blur_weight));
+}
+
+main > section {
+    display: grid;
+    height: 90%;
+    width: 95%;
+    grid-template-columns: 30rem 1fr;
+    grid-template-rows: 100%;
+    gap: 3%;
+}
+
+.section__title {
+    font-size: 4.6rem;
+    font-weight: 600;
+    font-family: sans-serif, Helvetica, Arial;
+    color: var(--nav_color);
+    align-self: center;
+}
+
+.section__content {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows:  repeat(12, max(1fr, 30px));
+    padding-top: 30px;
+    padding-left: 15px
+}
+
+p {
+    font-size: 2rem;
+    font-weight: 500;
+    font-family: sans-serif, Helvetica, Arial;
+    color: var(--text_color);
+    text-align: justify;
+}
+
+p.section__description {
+    grid-row: 1 /  9;
+    display: flex;
+    padding: 18px;
+    border-radius: 50px;
+    backdrop-filter: grayscale();
+    max-width: 700px;
+    align-self: center;
+}
+
+.center-button {
+    grid-row: 9 / 12;
+    max-width: 700px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.button__model > .button__hide-icon {
+    font-size: 4.6rem;
+    visibility: hidden;
+    position: absolute;
+}
+
+.button__model {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    height: 150px;
+    width: 150px;
+    border: none;
+    border-radius: 50%;
+    background-color: var(--nav_color);
+    color: var(--text_color_button);
+    font-size: 2.6rem;
+    font-weight: bold;
+    font-family: sans-serif, Helvetica, Arial;
+    box-shadow: -6px 6px var(--button_shadow);
+    position: relative;
+}
+
+.button__model:hover {
+    background-color: var(--text_color_button);
+    color: var(--nav_color);
+    border: 2px solid var(--nav_color);
+}
+
+.button__model:hover > .button__hide-icon {
+    visibility: visible;
+}
+
+.button__model:hover > .button__text {
+    visibility: hidden;
+}
+
+.button__model:active {
+    filter: brightness(var(--bright_button));
+    transform: translate(-2px, 2px);
+    box-shadow: -2px 2px var(--button_shadow_hover);
+}
+
+footer {
+    grid-area: footer;
+    display: grid;
+    grid-template-columns: 80% 20%;
+    grid-template-rows: 100%;
+    place-items: center;
+    background-color: var(--nav_bg_color);
+    color: var(--nav_color);
+    backdrop-filter: blur(var(--nav_blur_weight));
+    font-size: 1.6rem;
+    font-weight: bold;
+    font-family: sans-serif, Helvetica, Arial;
+    transition: all 1.5s;
+}
+
+footer > time {
+    font-size: 3.2rem;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    animation: shadowTime 3s ease-in-out;
+    animation-delay: 2s;
+}
+
+@keyframes shadowTime {
+    0%, 100% {
+        filter: drop-shadow(0px 0px 10px var(--date_shadow));
+    }
+    50% {
+        filter: drop-shadow(80px 0px 0px var(--date_shadow));
+    }
+
+}
+
+footer > ul {
+    display: grid;
+    align-items: center;
+    justify-items: end;
+    height: 100%;
+    width: 100%;
+    grid-template-columns: 1fr 1fr 1fr 4fr;
+    grid-template-rows: 100%;
+}
+
+footer > ul > li {
+    display: flex;
+}
+
+footer > ul > li:hover > label {
+    animation: expandToUp .7s ease-in-out infinite;
+    animation-fill-mode: forwards;
+    animation-direction: alternate;
+}
+
+@keyframes expandToUp {
+    100% {
+        transform: scale(1.2) translateY(-20%)
+    }
+}
+
+.modal {
+    height: 100%;
+    width: 100%;
+    background-color: var(--modal_bg_color);
+    backdrop-filter: brightness(var(--bright_modal)) blur(var(--modal_blur_weight));
+    position: absolute;
+    visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal .close_panel {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    position: absolute;
+}
+
+.modal > .plain_panel {
+    height: 80%;
+    width: 80%;
+    background-color: var(--plain-panel_bg_color);
+    color: var(--nav_color);
+    border-radius: 20px;
+    box-shadow: inset 0px 0px 20px var(--button_shadow_hover);
+    padding: 15px 20px;
+    position: relative;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
+.modal > .plain_panel > .section__title {
+    font-size: 4.6rem;
+    font-family: sans-serif;
+    font-weight: bold;
+    margin-bottom: 18px;
+}
+
+.modal > .plain_panel > .section__description > p {
+    margin-bottom: 9px;
+}
+
+.modal > .plain_panel > .section__description > p:last-child {
+    margin-bottom: 0;
+}
+
+.modal > .plain_panel > .section__description {
+    height: auto;
+    margin-bottom: 25px;
+    overflow: scroll;
+    overflow-x: hidden;
+    overscroll-behavior-y: contain;
+}
+
+.modal > .plain_panel > .button_box {
+    width: 100%;
+    height: 45%;
+    position: relative;
+    bottom: -30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button_box > .interactive-buttons {
+    width: 100%;
+    position: absolute;
+    bottom: -30px;
+    display: flex;
+    justify-content: center;
+    gap: 5%;
+}
+
+.modal > .plain_panel .modal__close-button {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    top: -15px;
+    right: -15px;
+    display: inline-flex;
+    align-items: center;
+    box-shadow: -3px 3px var(--button_shadow);
+}
+
+.modal > .plain_panel .modal__close-button:active {
+    box-shadow: -1px 1px var(--button_shadow_hover);
+}
+
+.icon-close::after {
+    content: "X";
+    font-weight: bold;
+    font-family: sans-serif, Helvetica, Arial;
+}
+
+.modal > .plain_panel .modal__close-button > .button__hide-icon {
+    font-size: 2.6rem;
+}
+
+.button__model > .button__color-layer {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    position: absolute;
+}
+
+.button__guests > .button__color-layer {
+    background-color: var(--button_guests_color_layer);
+}
+
+.button__signup > .button__color-layer {
+    background-color: var(--button_signup_color_layer);
+}
+
+.button__login > .button__color-layer {
+    background-color: var(--button_login_color_layer);
+}
+
+.modal__close-button > .button__color-layer {
+    background-color: var(--button_close_color_layer);
+}
+
+#howToUse:not(:checked) ~ .modal__howToUse .button__model:hover >.button__hide-icon,
+#howToUse:not(:checked) ~ .modal__howToUse .button__model:hover >.button__hide-icon {
+    visibility: hidden;
+}
+
+#howToUse:checked ~ .modal__howToUse,
+#contactMe:checked ~ .modal__contactMe {
+    visibility: visible;
+}
