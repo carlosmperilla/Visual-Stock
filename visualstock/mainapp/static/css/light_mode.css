@@ -18,6 +18,7 @@
     --button_signup_color_layer: rgba(14, 213, 77, 0.5);
     --button_login_color_layer: rgba(107, 164, 207, 0.5);
     --button_close_color_layer: rgba(247, 102, 41, 0.5);
+    --form_error_color: rgb(136, 7, 7);
   }
 
 body {

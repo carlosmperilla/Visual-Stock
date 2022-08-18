@@ -5,4 +5,37 @@
 {% endblock title %}
 
 {% block content %}
+<section class="section__signup">
+    <h2 class="section__title">{{ title }}</h2>
+    <section class="section__content">
+
+        {% comment %} {% if messages %}
+        {% for message in messages %}
+            <i class="alert alert-success">
+                {{ message.level }} - {{ message }}
+             {% if message.level == 40 %}
+                hola
+             {% endif %}
+            </i>
+        {% endfor %}
+    {% endif %} {% endcomment %}
+        <div class="section__description">
+            {% if signup_form.errors %}
+                <div class="div__signup--errors">{{ signup_form_errors | safe }}</div>        
+            {% endif %}
+            <form id="form__signup" action="" method="post">
+                {% csrf_token %}
+                {% for field in signup_form %}
+                <label for="{{ field.name }}">
+                    {{ field }}
+                    <span class="input__effect"></span>
+                </label>
+                {% endfor %}
+            </form>
+            <div class="center-button">
+                <button type="submit" form="form__signup" class="button__model button__signup"><span class="button__text">Registrarse</span><span class="button__hide-icon icon-user"></span></button>
+            </div>
+        </div>
+    </section>
+</section>
 {% endblock content %}
