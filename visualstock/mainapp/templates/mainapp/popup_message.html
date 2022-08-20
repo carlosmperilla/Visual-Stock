@@ -1,0 +1,16 @@
+{% if messages %}
+{% for message in messages %}
+    <input type="checkbox" id="closePopUp">
+    <div class="popup_message  
+                    {% if message.level == 25 %} 
+                        success_level 
+                    {% elif message.level == 20 %} 
+                        info_level 
+                    {% endif %}">
+        {{ message | safe }}
+        <label for="closePopUp">
+            <span class="popup_close_button"></span>
+        </label>
+    </div>
+{% endfor %}
+{% endif %}

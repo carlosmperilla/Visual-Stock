@@ -43,7 +43,7 @@
                     Importar/Actualizar Imagenes
                 </li>
                 <li>
-                    <a href="{% url 'logout' %}">Cerrar Sesión</a>
+                    <a href="{% url 'logout' %}?next={{ request.path_info }}">Cerrar Sesión</a>
                 </li>
             {% else %}
                 <li>
@@ -58,6 +58,7 @@
         <div class="bg_navbar"></div>
     </header>
     <main id="content">
+        {% include 'mainapp/popup_message.html' %}
         {% block content %}
         {% endblock content %}
     </main>
@@ -78,49 +79,10 @@
         <time datetime="{% now 'Y' %}">{% now 'Y' %}</time>
     </footer>
     <section class="modal modal__howToUse">
-        <label for="howToUse">
-            <div class="close_panel"></div>
-        </label>
-        <div class="plain_panel">
-            <label for="howToUse">
-                <div class="button__model modal__close-button"><div class="button__color-layer"></div><span class="button__text icon-close"></span><span class="button__hide-icon icon-close"></span></div>
-            </label>
-            <h2 class="section__title">¿Cómo usar?</h2>
-            <div class="section__description">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam illum, fugit excepturi adipisci odit ipsum? Ducimus, reiciendis? Atque asperiores eveniet eaque maiores quo incidunt saepe eum, excepturi perspiciatis iure deserunt?</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam illum, fugit excepturi adipisci odit ipsum? Ducimus, reiciendis? Atque asperiores eveniet eaque maiores quo incidunt saepe eum, excepturi perspiciatis iure deserunt?</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam illum, fugit excepturi adipisci odit ipsum? Ducimus, reiciendis? Atque asperiores eveniet eaque maiores quo incidunt saepe eum, excepturi perspiciatis iure deserunt?</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam illum, fugit excepturi adipisci odit ipsum? Ducimus, reiciendis? Atque asperiores eveniet eaque maiores quo incidunt saepe eum, excepturi perspiciatis iure deserunt?</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam illum, fugit excepturi adipisci odit ipsum? Ducimus, reiciendis? Atque asperiores eveniet eaque maiores quo incidunt saepe eum, excepturi perspiciatis iure deserunt?</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam illum, fugit excepturi adipisci odit ipsum? Ducimus, reiciendis? Atque asperiores eveniet eaque maiores quo incidunt saepe eum, excepturi perspiciatis iure deserunt?</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam illum, fugit excepturi adipisci odit ipsum? Ducimus, reiciendis? Atque asperiores eveniet eaque maiores quo incidunt saepe eum, excepturi perspiciatis iure deserunt?</p>
-            </div>
-            <div class="button_box">
-                <div class="interactive-buttons">
-                    <button class="button__model button__guests"><div class="button__color-layer"></div><span class="button__text">Invitados</span><span class="button__hide-icon icon-address-book"></span></button>
-                    <button class="button__model button__signup"><div class="button__color-layer"></div><span class="button__text">Registrarse</span><span class="button__hide-icon icon-user"></span></button>
-                    <button class="button__model button__login"><div class="button__color-layer"></div><span class="button__text">Iniciar Sesión</span><span class="button__hide-icon icon-enter"></span></button>            </div>
-                </div>                
-            </div>
+        {% include 'mainapp/modal_howToUse.html' %}
     </section>
     <section class="modal modal__contactMe">
-        <label for="contactMe">
-            <div class="close_panel"></div>
-        </label>
-        <div class="plain_panel">
-            <label for="contactMe">
-                <div class="button__model modal__close-button"><div class="button__color-layer"></div><span class="button__text icon-close"></span><span class="button__hide-icon icon-close"></span></div>
-            </label>
-            <h2 class="section__title">Medios de contacto</h2>
-            <div class="section__description">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam illum, fugit excepturi adipisci odit ipsum? Ducimus, reiciendis? Atque asperiores eveniet eaque maiores quo incidunt saepe eum, excepturi perspiciatis iure deserunt?</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam illum, fugit excepturi adipisci odit ipsum? Ducimus, reiciendis? Atque asperiores eveniet eaque maiores quo incidunt saepe eum, excepturi perspiciatis iure deserunt?</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam illum, fugit excepturi adipisci odit ipsum? Ducimus, reiciendis? Atque asperiores eveniet eaque maiores quo incidunt saepe eum, excepturi perspiciatis iure deserunt?</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam illum, fugit excepturi adipisci odit ipsum? Ducimus, reiciendis? Atque asperiores eveniet eaque maiores quo incidunt saepe eum, excepturi perspiciatis iure deserunt?</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam illum, fugit excepturi adipisci odit ipsum? Ducimus, reiciendis? Atque asperiores eveniet eaque maiores quo incidunt saepe eum, excepturi perspiciatis iure deserunt?</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam illum, fugit excepturi adipisci odit ipsum? Ducimus, reiciendis? Atque asperiores eveniet eaque maiores quo incidunt saepe eum, excepturi perspiciatis iure deserunt?</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam illum, fugit excepturi adipisci odit ipsum? Ducimus, reiciendis? Atque asperiores eveniet eaque maiores quo incidunt saepe eum, excepturi perspiciatis iure deserunt?</p>
-            </div>
+        {% include 'mainapp/modal_contactMe.html' %}
     </section>
 </body>
 <script>

@@ -19,6 +19,8 @@
     --button_login_color_layer: rgba(107, 164, 207, 0.5);
     --button_close_color_layer: rgba(247, 102, 41, 0.5);
     --form_error_color: rgb(183 57 57);
+    --popup_success-message_bg_color: rgba(0,217,12,0.25);
+    --popup_info-message_bg_color: rgba(0,121,217,0.25);
 }
 
 body {

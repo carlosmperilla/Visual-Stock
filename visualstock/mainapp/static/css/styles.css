@@ -28,37 +28,42 @@ body {
     background-repeat: repeat;
     background-size: cover;
     height: 100vh;
+    /* max-height: 100%; */
     grid-template-areas: "header"
                          "main"
                          "footer";
     grid-template-columns: 100%;
-    grid-template-rows: 10% 1fr 7%;
+    grid-template-rows: 60px 1fr 37px;
 }
 
 header {
     grid-area: header;
     display: flex;
-    width: 95vw;
-    height: 100%;
+    width: 100vw;
+    max-width: 100%;
+    height: 60px;
+    padding-left: 20px;
+	padding-right: 20px;
+	gap: 20px;
+    position: relative;
 }
 
 header > .bg_navbar {
-    position: fixed;
-    z-index: -1;
-    top: 0;
-    right: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
     left: 0;
-    height: 10%;
-    transition: .5s;
-    pointer-events: none;
+    z-index: -1;
     background-color: var(--nav_bg_color);
     backdrop-filter: blur(var(--nav_blur_weight));
+    transition: .5s;
+    pointer-events: none;
 }
 
 header > label {
     display: flex;
+    width: 36px;
     align-items: center;
-    padding-right: 20px;
     order: 1;
 }
 
@@ -189,6 +194,7 @@ main {
     border-radius: 20px 20px;
     background-color: var(--nav_bg_color);
     backdrop-filter: blur(var(--nav_blur_weight));
+    position: relative;
 }
 
 main > section {
@@ -215,6 +221,7 @@ main > section {
 }
 
 
+.section__login .div__login--errors,
 .section__signup .div__signup--errors {
     position: absolute;
     top: -75px;
@@ -222,6 +229,8 @@ main > section {
     width: 80%;
     height: 100px;
     overflow-y: auto;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
     border-radius: 50px 0;
     font-size: 1.6rem;
     font-weight: bold;
@@ -235,25 +244,35 @@ main > section {
     padding: 10px;
 }
 
+.section__login .div__login--errors::-webkit-scrollbar,
+.section__signup .div__signup--errors::-webkit-scrollbar {
+    display: none;
+}
+
+.section__login .div__login--errors > ul.errorlist,
 .section__signup .div__signup--errors > ul.errorlist {
     height: 100%;
 }
+.section__login .div__login--errors ul.errorlist > li,
 .section__signup .div__signup--errors ul.errorlist > li {
     list-style: square;
     margin-left: 20px;
     color: var(--form_error_color);
 }
 
+.section__login .div__login--errors ul.errorlist > li li,
 .section__signup .div__signup--errors ul.errorlist > li li {
     list-style: disc;
     color: var(--text_color);
 }
 
 
+.section__login .section__content,
 .section__signup .section__content {
     padding: 0;
 }
 
+.section__login > .section__title,
 .section__signup > .section__title {
     justify-self: center;
 }
@@ -266,6 +285,7 @@ p, form > label {
     text-align: justify;
 }
 
+.section__login .section__description,
 .section__signup .section__description {
     border-radius: 50px 0;
     display: flex;
@@ -275,11 +295,13 @@ p, form > label {
     position: relative;
 }
 
+.section__login .center-button,
 .section__signup .center-button {
     width: 50%;
     align-items: center;
 }
 
+.section__login .input__effect,
 .section__signup .input__effect {
     position: absolute;
     width: 100%;
@@ -288,13 +310,15 @@ p, form > label {
     left: 0;
     z-index: -1;
     border-bottom: 2px solid var(--nav_color);
-    transition: all 2s;
+    transition: all 1.5s;
 }
 
+.section__login label:hover > .input__effect,
 .section__signup label:hover > .input__effect {
     transform: scaleX(0.5);
 }
 
+.section__login .section__description > form,
 .section__signup .section__description > form {
     display: flex;
     flex-direction: column;
@@ -303,6 +327,12 @@ p, form > label {
     padding: 20px;
 }
 
+.section__login .section__description > form input,
+.section__login .section__description > form input:active,
+.section__login .section__description > form input:focus,
+.section__login .section__description > form input:-webkit-autofill,
+.section__login .section__description > form input:-webkit-autofill:focus,
+.section__login .section__description > form input:-webkit-autofill:active,
 .section__signup .section__description > form input,
 .section__signup .section__description > form input:active,
 .section__signup .section__description > form input:focus,
@@ -317,10 +347,14 @@ p, form > label {
     height: 100%;
 }
 
-/* input:-webkit-autofill,
-input:-webkit-autofill:focus, */
+
 
 input:-webkit-autofill:hover, 
+.section__login .section__description > form input::placeholder,
+.section__login .section__description > form input:not(:focus),
+.section__login .section__description > form input:-webkit-autofill:focus,
+.section__login .section__description > form input:-webkit-autofill:not(:focus),
+.section__login .section__description > form input:focus,
 .section__signup .section__description > form input::placeholder,
 .section__signup .section__description > form input:not(:focus),
 .section__signup .section__description > form input:-webkit-autofill:focus,
@@ -333,6 +367,10 @@ input:-webkit-autofill:hover,
     text-align: center;
 }
 
+.section__login .section__description > form input:not(:focus),
+.section__login .section__description > form input:focus,
+.section__login .section__description > form input:-webkit-autofill:focus,
+.section__login .section__description > form input:-webkit-autofill:not(:focus),
 .section__signup .section__description > form input:not(:focus),
 .section__signup .section__description > form input:focus,
 .section__signup .section__description > form input:-webkit-autofill:focus,
@@ -340,6 +378,8 @@ input:-webkit-autofill:hover,
     color: var(--nav_color);
 }
 
+.section__login .section__description > form input:active,
+.section__login .section__description > form input:-webkit-autofill,
 .section__signup .section__description > form input:active,
 .section__signup .section__description > form input:-webkit-autofill  {
     background-color: var(--nav_bg_color);
@@ -347,6 +387,7 @@ input:-webkit-autofill:hover,
     border-radius: 20px;
 }
 
+.section__login .section__description > form label,
 .section__signup .section__description > form label {
     padding: 0;
     position: relative;
@@ -447,16 +488,15 @@ footer > time {
 }
 
 footer > ul {
-    display: grid;
+    display: flex;
     align-items: center;
-    justify-items: end;
+    justify-content: end;
     height: 100%;
     width: 100%;
-    grid-template-columns: 1fr 1fr 1fr 4fr;
-    grid-template-rows: 100%;
 }
 
 footer > ul > li {
+    padding-left: 40px;
     display: flex;
 }
 
@@ -528,8 +568,17 @@ footer > ul > li:hover > label {
     margin-bottom: 25px;
     overflow-y: auto;
     overflow-x: hidden;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
     overscroll-behavior-y: contain;
+    border-radius: 0;
+    flex-direction: column;
 }
+
+.modal > .plain_panel > .section__description::-webkit-scrollbar {
+    display: none;
+}
+  
 
 .modal > .plain_panel > .button_box {
     width: 100%;
@@ -576,26 +625,37 @@ footer > ul > li:hover > label {
     font-size: 2.6rem;
 }
 
-.button__model > .button__color-layer {
+.button__model .button__color-layer,
+.button__model .button__color-layer > a {
     width: 100%;
     height: 100%;
     border-radius: 50%;
     position: absolute;
+    z-index: 2;
 }
 
-.button__guests > .button__color-layer {
+.button__color-layer ~ .button__hide-icon {
+    z-index: 1;
+}
+
+.button__model .button__color-layer > a {
+    display: block;
+    position: relative;
+}
+
+.button__guests .button__color-layer {
     background-color: var(--button_guests_color_layer);
 }
 
-.button__signup > .button__color-layer {
+.button__signup .button__color-layer {
     background-color: var(--button_signup_color_layer);
 }
 
-.button__login > .button__color-layer {
+.button__login .button__color-layer {
     background-color: var(--button_login_color_layer);
 }
 
-.modal__close-button > .button__color-layer {
+.modal__close-button .button__color-layer {
     background-color: var(--button_close_color_layer);
 }
 
@@ -608,3 +668,79 @@ footer > ul > li:hover > label {
 #contactMe:checked ~ .modal__contactMe {
     visibility: visible;
 }
+
+.success_level {
+    background-color: var(--popup_success-message_bg_color);
+}
+
+.info_level {
+    background-color: var(--popup_info-message_bg_color);
+}
+
+
+#closePopUp,
+#closePopUp:checked ~ .popup_message {
+    display: none;
+}
+
+.popup_message {
+    color: var(--nav_color);
+    position: absolute;
+    top: calc(50% - 25px);
+    left: 5%;
+    width: 90%;
+    height: 50px;
+    border-radius: 20px;
+    font-size: 2.6rem;
+    font-family: sans-serif, Arial, Helvetica;
+    font-weight: normal;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: rarara 7s ease-in;
+    animation-fill-mode: forwards;
+    z-index: 1;
+}
+
+.popup__span {
+    font-weight: bold;
+}
+
+.popup_close_button::after {
+    content: "X";
+    font-size: 2.6rem;
+    font-family: sans-serif, Arial, Helvetica;
+    font-weight: bolder;
+    position: absolute;
+    right: 1%;
+    bottom: 23%;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--nav_color);
+    color: var(--text_color_button);
+}
+
+@keyframes rarara {
+    0% {
+        top: calc(50% - 25px);
+    }
+    20% {
+        top: -25px;
+        opacity: 1;
+    }
+    98% {
+        visibility: visible;
+        opacity: 0;
+        top: -25px;
+    }
+    100% {
+        opacity: 0;
+        visibility: hidden;
+        top: -25px;
+    }
+}
+
