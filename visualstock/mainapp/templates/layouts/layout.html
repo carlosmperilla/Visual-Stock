@@ -25,25 +25,33 @@
         <label for="changeColorTheme">
             <div class="active-hide"><span class="icon-contrast"></span></div>
         </label>
-        <nav>
+        <nav class="{% if request.user.is_authenticated %}nav__post-login{% endif %}"">
             <ul>
             {% if not is_index %}
                 <li>
                     <a href="{% url 'index' %}"><span class="icon-home3"></span> Inicio</a>
                 </li>
             {% endif %}
-            {% if user.email %}
+            {% if request.user.is_authenticated %}
+                {% if is_stock %}
+                    <li>
+                        Ver como
+                    </li>
+                    <li>
+                        Importar/Actualizar Imagenes
+                    </li>
+                {%  endif %}
                 <li>
                     Stocks Creados
                 </li>
-                <li>
-                    Ver como
-                </li>
-                <li>
-                    Importar/Actualizar Imagenes
-                </li>
-                <li>
-                    <a href="{% url 'logout' %}?next={{ request.path_info }}">Cerrar Sesión</a>
+                <li class="li__user-button">
+                   <span class="icon-user"></span>&nbsp;{{ user.username }}
+                   <div class="submenu__triangle-draw"></div>
+                   <ul class="ul__user-options">
+                        <li class="li__user-option li__logout-option">
+                            <a href="{% url 'logout' %}?next={{ request.path_info }}">Cerrar Sesión</a>
+                        </li>
+                   </ul>
                 </li>
             {% else %}
                 <li>

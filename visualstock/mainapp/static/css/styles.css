@@ -195,6 +195,7 @@ main {
     background-color: var(--nav_bg_color);
     backdrop-filter: blur(var(--nav_blur_weight));
     position: relative;
+    z-index: 0;
 }
 
 main > section {
@@ -522,6 +523,7 @@ footer > ul > li:hover > label {
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 2;
 }
 
 .modal .close_panel {
@@ -697,7 +699,7 @@ footer > ul > li:hover > label {
     display: flex;
     justify-content: center;
     align-items: center;
-    animation: rarara 7s ease-in;
+    animation: RiseAndFade 7s ease-in;
     animation-fill-mode: forwards;
     z-index: 1;
 }
@@ -724,7 +726,7 @@ footer > ul > li:hover > label {
     color: var(--text_color_button);
 }
 
-@keyframes rarara {
+@keyframes RiseAndFade {
     0% {
         top: calc(50% - 25px);
     }
@@ -744,3 +746,97 @@ footer > ul > li:hover > label {
     }
 }
 
+
+.nav__post-login > ul {
+	justify-content: start;
+}
+
+.li__user-button {
+    order: -1;
+    margin-left: 0;
+    border: 2px solid var(--nav_color);
+    border-radius: 20px;
+    user-select: none;
+    position: relative;
+}
+
+.li__user-button:hover {
+    border: 2px solid var(--interactive-icon_hover);
+    animation: light-color 1.5s ease;
+    animation-fill-mode: forwards;
+}
+
+@keyframes light-color {
+    100% {
+        color: var(--interactive-icon_hover);
+    }
+}
+
+.li__user-button:hover > .icon-user {
+    animation: swing-color 1.5s ease infinite;
+    animation-direction: alternate-reverse;
+}
+
+.submenu__triangle-draw {
+    visibility: collapse;
+    opacity: 0;
+    position: absolute;
+    left: 46%;
+    top: 111%;
+    width: 15px;
+    height: 15px;
+    background-color: var(--plain-panel_bg_color);
+    box-shadow: inset 0px 0px 5px var(--button_shadow_hover);
+    border-radius: 5px;
+    transform: rotate(45deg) translateY(20px);
+    transition: 00ms all ease-in;
+    transition-delay: .7s;
+}
+
+.ul__user-options {
+    visibility: collapse;
+    opacity: 0;
+    position: absolute;
+    top: calc(100% + 10px);
+    z-index: 1;
+    background-color: var(--plain-panel_bg_color);
+    box-shadow: inset 0px 0px 11px var(--button_shadow_hover);
+    border-radius: 20px;
+    padding: 10px 10px;
+    transition: .7s all;
+}
+
+.ul__user-options > .li__user-option {
+    border-bottom: 1px solid white;
+    margin-bottom: 5px;
+    font-size: 0.8em;
+    display: flex;
+    justify-content: center;
+    white-space: nowrap;
+}
+
+.ul__user-options > .li__user-option:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.ul__user-options > .li__user-option:hover > a {
+    color: var(--nav_color_hover);
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+.ul__user-button:hover,
+.submenu__triangle-draw:hover,
+.li__user-button:hover > .ul__user-options,
+.li__user-button:hover > .submenu__triangle-draw {
+    visibility: visible;
+    opacity: 1;
+}
+.li__user-button:hover > .submenu__triangle-draw {
+    transform: rotate(45deg) translateY(0);
+}
+.li__user-button:not(:hover) > .submenu__triangle-draw {
+    transition: all .7s step-start;
+}
