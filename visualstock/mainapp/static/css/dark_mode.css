@@ -18,9 +18,17 @@
     --button_signup_color_layer: rgba(14, 213, 77, 0.5);
     --button_login_color_layer: rgba(107, 164, 207, 0.5);
     --button_close_color_layer: rgba(247, 102, 41, 0.5);
+    --button_addStock_color_layer: rgba(57,99,142,0.52);
     --form_error_color: rgb(183 57 57);
     --popup_success-message_bg_color: rgba(0,217,12,0.25);
     --popup_info-message_bg_color: rgba(0,121,217,0.25);
+    --stock-card__color: #202834;
+    --add_button__color: #161a2c;
+    --add_stock_modal_bg: rgba(32, 7, 69, 0.556);
+    --add_stock_input_text: rgb(34, 26, 66);
+    --add_stock_input_bg: rgba(192, 192, 192, 0.278);
+    --add_stock_input_bright: 1.2;
+    --select_file_bg: rgb(57, 39, 84);
 }
 
 body {

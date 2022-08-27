@@ -1,0 +1,12 @@
+<button onclick="openAddStockModal()" class="add_stock" title="Añadir Stock"></button>
+<section class="container__stocks">
+    <section class="section__content post_login">
+        {{ objeto }}
+        {% for stock in stocks %}
+            <article class="stock-card">
+                <a href="{% url 'stock:stock' stock.name %}" class="stock-card__name">{{ stock.name }}</a>
+                <img class="stock-card__image" src="{{ stock.image.url }}" alt="{{ stock.image.name }}">
+            </article>
+        {% endfor %}
+    </section>
+</section>

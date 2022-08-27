@@ -1,20 +1,33 @@
 {% extends 'layouts/layout.html' %}
+{% load static %}
 
 {% block title %}
     {{ title }}
 {% endblock title %}
 
 {% block content %}
-    <section>
-        <h2 class="section__title">Bienvenido a Visual Stock</h2>
-        <section class="section__content">
-            <p class="section__description">Una aplicación para visualizar stocks de productos.
-                Presione el boton de invitados a continuación si desea ver el funcionamiento de la aplicación web,
-            antes de registrarse.
-            </p>
-            <div class="center-button">
-                <button class="button__model button__guests"><span class="button__text">Invitados</span><span class="button__hide-icon icon-address-book"></span></button>
-            </div>
-        </section>
-    </section>
+    {% if request.user.is_authenticated %}
+        {% include 'mainapp/index_authenticated.html' %}
+    {% else %}
+        {% include 'mainapp/index_not_authenticated.html' %}
+    {% endif %}
 {% endblock content %}
+
+{% block scripts %}
+    {% if request.user.is_authenticated %}
+        <script>
+            function openAddStockModal() {
+                var AddStockCheck = document.getElementById("addStockCheck");
+                var firstTextInput = document.querySelector("#form__stock-add input[type='text']");
+                addStockCheck.checked = true;
+                firstTextInput.focus();
+            }
+            function uploadFilePutName(target) {
+                var selectorFileNameTextBox = "#"+target.id+" ~ .upload-file__interfaz .upload-file__filename";
+                var UploadFileNameField = document.querySelector(selectorFileNameTextBox);
+                UploadFileNameField.innerHTML = target.files[0].name;
+            }
+        </script>
+        <script src="{% static '/js/addStockInteractive.js'%}"></script>
+    {% endif %}
+{% endblock scripts %}

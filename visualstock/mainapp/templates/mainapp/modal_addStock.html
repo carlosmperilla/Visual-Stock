@@ -1,0 +1,44 @@
+<label for="addStockCheck">
+    <div class="close_panel"></div>
+</label>
+<div class="plain_panel">
+    <label for="addStockCheck">
+        <div class="button__model modal__close-button"><div class="button__color-layer"></div><span class="button__text icon-close"></span><span class="button__hide-icon icon-close"></span></div>
+    </label>
+    <button class="" onclick=""></button>
+    <div class="errors-content collapse">
+        <ul class="ul__stock-add--errors"></ul>
+    </div>
+    <h2 class="section__title">Añadir Stock</h2>
+    <div class="section__description">
+        <div class="form__addStock-content">
+
+            <form id="form__stock-add" action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form__first_step">
+                    {% for field in stock_step_one %}
+                        <label for="{{ field.auto_id }}">
+                            {{ field.label }}
+                        </label>
+                        {{ field }}
+                        {% if field.field.widget.input_type == 'file' %}
+                            <div class="upload-file__interfaz">
+                                <label for="{{ field.auto_id }}" class="upload-file__button-load" tabindex="{{ forloop.counter }}"><span class="upload-file__button-icon icon-upload"></span class="upload-file__button-text"><span>Subir Archivo</span></label>
+                                <span class="upload-file__filename"></span>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="form__second_step collapse">
+                    {% for field in stock_step_two %}
+                        <label for="{{ field.auto_id }}">{{ field.label }}</label>
+                        {{ field }}
+                    {% endfor %}
+                </div>
+                <datalist id="columnoptions"></datalist>
+            </form>
+        
+            <button class="button__model" type="button" form="form__stock-add" formenctype="multipart/form-data" onclick="ProcesarDatos()"><div class="button__color-layer"></div><span class="button__text">Subir Stock</span><span class="button__hide-icon icon-upload"></span></button>
+        </div>
+    </div>
+</div>

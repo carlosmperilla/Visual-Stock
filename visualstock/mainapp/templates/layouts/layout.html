@@ -17,6 +17,10 @@
     <input type="checkbox" id="changeColorTheme">
     <input type="checkbox" id="howToUse">
     <input type="checkbox" id="contactMe">
+    {% if request.user.is_authenticated and is_index %}
+        <input type="checkbox" id="addStockCheck">
+    {% endif %}
+
     <header>
         <label for="display_nav">
             <span class="icon-eye"></span>
@@ -41,8 +45,16 @@
                         Importar/Actualizar Imagenes
                     </li>
                 {%  endif %}
-                <li>
+                <li class="li__created-stocks">
                     Stocks Creados
+                    <div class="submenu__triangle-draw"></div>
+                    <ul class="ul__stocks">
+                        {% for stock in stocks %}
+                            <li class="li__stock">
+                                <a href="{% url 'stock:stock' stock.name %}">{{ stock.name }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
                 </li>
                 <li class="li__user-button">
                    <span class="icon-user"></span>&nbsp;{{ user.username }}
@@ -86,6 +98,11 @@
         </ul>
         <time datetime="{% now 'Y' %}">{% now 'Y' %}</time>
     </footer>
+    {% if request.user.is_authenticated and is_index %}
+        <section class="modal modal__addStock">
+            {% include 'mainapp/modal_addStock.html' %}
+        </section>
+    {% endif %}
     <section class="modal modal__howToUse">
         {% include 'mainapp/modal_howToUse.html' %}
     </section>
@@ -97,5 +114,6 @@
     const dark_theme = "{% static '/css/dark_mode.css' %}";
     const light_theme = "{% static '/css/light_mode.css' %}";
 </script>
-<script src="{% static 'js/interactive-icons.js'%}"></script>
+<script src="{% static '/js/interactive-icons.js'%}"></script>
+{% block scripts %}{% endblock scripts %}
 </html> 

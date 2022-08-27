@@ -33,7 +33,7 @@ body {
                          "main"
                          "footer";
     grid-template-columns: 100%;
-    grid-template-rows: 60px 1fr 37px;
+    grid-template-rows: 60px minmax(calc(100% - 97px), 1fr) 37px;
 }
 
 header {
@@ -90,7 +90,8 @@ header .icon-contrast {
 #changeColorTheme, 
 #display_nav,
 #howToUse,
-#contactMe {
+#contactMe,
+#addStockCheck {
     display: none;
 }
 
@@ -218,7 +219,8 @@ main > section {
 .section__content {
     display: grid;
     padding-top: 30px;
-    padding-left: 15px
+    padding-left: 15px;
+    justify-items: center;
 }
 
 
@@ -331,15 +333,9 @@ p, form > label {
 .section__login .section__description > form input,
 .section__login .section__description > form input:active,
 .section__login .section__description > form input:focus,
-.section__login .section__description > form input:-webkit-autofill,
-.section__login .section__description > form input:-webkit-autofill:focus,
-.section__login .section__description > form input:-webkit-autofill:active,
 .section__signup .section__description > form input,
 .section__signup .section__description > form input:active,
-.section__signup .section__description > form input:focus,
-.section__signup .section__description > form input:-webkit-autofill,
-.section__signup .section__description > form input:-webkit-autofill:focus,
-.section__signup .section__description > form input:-webkit-autofill:active {
+.section__signup .section__description > form input:focus {
     background: none;
     outline: none;
     border: none;
@@ -353,13 +349,9 @@ p, form > label {
 input:-webkit-autofill:hover, 
 .section__login .section__description > form input::placeholder,
 .section__login .section__description > form input:not(:focus),
-.section__login .section__description > form input:-webkit-autofill:focus,
-.section__login .section__description > form input:-webkit-autofill:not(:focus),
 .section__login .section__description > form input:focus,
 .section__signup .section__description > form input::placeholder,
 .section__signup .section__description > form input:not(:focus),
-.section__signup .section__description > form input:-webkit-autofill:focus,
-.section__signup .section__description > form input:-webkit-autofill:not(:focus),
 .section__signup .section__description > form input:focus {
     font-size: 2.4rem;
     font-weight: normal;
@@ -370,22 +362,34 @@ input:-webkit-autofill:hover,
 
 .section__login .section__description > form input:not(:focus),
 .section__login .section__description > form input:focus,
-.section__login .section__description > form input:-webkit-autofill:focus,
-.section__login .section__description > form input:-webkit-autofill:not(:focus),
 .section__signup .section__description > form input:not(:focus),
-.section__signup .section__description > form input:focus,
-.section__signup .section__description > form input:-webkit-autofill:focus,
-.section__signup .section__description > form input:-webkit-autofill:not(:focus) {
+.section__signup .section__description > form input:focus {
     color: var(--nav_color);
 }
 
 .section__login .section__description > form input:active,
-.section__login .section__description > form input:-webkit-autofill,
-.section__signup .section__description > form input:active,
-.section__signup .section__description > form input:-webkit-autofill  {
+.section__signup .section__description > form input:active {
     background-color: var(--nav_bg_color);
     backdrop-filter: blur(var(--modal_blur_weight));
     border-radius: 20px;
+}
+
+
+.section__login .section__description > form input:-webkit-autofill,
+.section__signup .section__description > form input:-webkit-autofill,
+.section__signup .section__description > form input:-webkit-autofill:focus,
+.section__signup .section__description > form input:-webkit-autofill:not(:focus),
+.section__login .section__description > form input:-webkit-autofill:focus,
+.section__login .section__description > form input:-webkit-autofill:not(:focus),
+.section__signup .section__description > form input:-webkit-autofill:active,
+.section__login .section__description > form input:-webkit-autofill:active {
+    border-radius: 20px;
+    font-size: 2.4rem;
+}
+
+.section__signup .section__description > form input:-webkit-autofill ~ .input__effect,
+.section__login .section__description > form input:-webkit-autofill ~ .input__effect {
+    display: none;
 }
 
 .section__login .section__description > form label,
@@ -662,12 +666,14 @@ footer > ul > li:hover > label {
 }
 
 #howToUse:not(:checked) ~ .modal__howToUse .button__model:hover >.button__hide-icon,
-#howToUse:not(:checked) ~ .modal__howToUse .button__model:hover >.button__hide-icon {
+#contactMe:not(:checked) ~ .modal__contactMe .button__model:hover >.button__hide-icon,
+#addStockCheck:not(:checked) ~ .modal__addStock .button__model:hover >.button__hide-icon {
     visibility: hidden;
 }
 
 #howToUse:checked ~ .modal__howToUse,
-#contactMe:checked ~ .modal__contactMe {
+#contactMe:checked ~ .modal__contactMe,
+#addStockCheck:checked ~ .modal__addStock  {
     visibility: visible;
 }
 
@@ -701,7 +707,7 @@ footer > ul > li:hover > label {
     align-items: center;
     animation: RiseAndFade 7s ease-in;
     animation-fill-mode: forwards;
-    z-index: 1;
+    z-index: 2;
 }
 
 .popup__span {
@@ -760,6 +766,11 @@ footer > ul > li:hover > label {
     position: relative;
 }
 
+.li__created-stocks {
+    user-select: none;
+    position: relative;
+}
+
 .li__user-button:hover {
     border: 2px solid var(--interactive-icon_hover);
     animation: light-color 1.5s ease;
@@ -793,7 +804,8 @@ footer > ul > li:hover > label {
     transition-delay: .7s;
 }
 
-.ul__user-options {
+.ul__user-options,
+.ul__stocks {
     visibility: collapse;
     opacity: 0;
     position: absolute;
@@ -806,7 +818,13 @@ footer > ul > li:hover > label {
     transition: .7s all;
 }
 
-.ul__user-options > .li__user-option {
+.ul__stocks {
+    left: 10%;
+    right: 10%;
+}
+
+.ul__user-options > .li__user-option,
+.ul__stocks > .li__stock {
     border-bottom: 1px solid white;
     margin-bottom: 5px;
     font-size: 0.8em;
@@ -815,12 +833,19 @@ footer > ul > li:hover > label {
     white-space: nowrap;
 }
 
-.ul__user-options > .li__user-option:last-child {
+.ul__stocks > .li__stock {
+    white-space: break-spaces;
+    text-align: center;
+}
+
+.ul__user-options > .li__user-option:last-child,
+.ul__stocks > .li__stock:last-child {
     border-bottom: none;
     margin-bottom: 0;
 }
 
-.ul__user-options > .li__user-option:hover > a {
+.ul__user-options > .li__user-option:hover > a,
+.ul__stocks > .li__stock:hover > a {
     color: var(--nav_color_hover);
     width: 100%;
     height: 100%;
@@ -830,13 +855,323 @@ footer > ul > li:hover > label {
 .ul__user-button:hover,
 .submenu__triangle-draw:hover,
 .li__user-button:hover > .ul__user-options,
-.li__user-button:hover > .submenu__triangle-draw {
+.li__user-button:hover > .submenu__triangle-draw,
+.ul__created-stocks:hover,
+.li__created-stocks:hover > .ul__stocks,
+.li__created-stocks:hover > .submenu__triangle-draw {
     visibility: visible;
     opacity: 1;
 }
-.li__user-button:hover > .submenu__triangle-draw {
+
+.li__user-button:hover > .submenu__triangle-draw,
+.li__created-stocks:hover > .submenu__triangle-draw {
     transform: rotate(45deg) translateY(0);
 }
-.li__user-button:not(:hover) > .submenu__triangle-draw {
+
+.li__user-button:not(:hover) > .submenu__triangle-draw,
+.li__created-stocks:not(:hover) > .submenu__triangle-draw {
     transition: all .7s step-start;
 }
+
+.container__stocks {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.section__content.post_login {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, max-content));
+    gap: 25px;
+    justify-content: center;
+    align-items: center;
+}
+
+.section__content.post_login > .stock-card {
+    background-color: var(--modal_bg_color);
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    contain: content;
+}
+
+.section__content.post_login > .stock-card > .stock-card__image {
+    aspect-ratio: 1 / 1;
+    width: 100%;
+    object-fit: cover;
+}
+
+.section__content.post_login > .stock-card > .stock-card__name {
+    position: absolute;
+    font-family: sans-serif, Arial, Helvetica;
+    font-weight: bolder;
+    font-size: 4.6rem;
+    mix-blend-mode: hard-light;
+}
+
+.section__content.post_login > .stock-card > .stock-card__name {
+    position: absolute;
+    font-family: sans-serif, Arial, Helvetica;
+    font-weight: bolder;
+    font-size: 5.6rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    color: var(--stock-card__color);
+    background-color: var(--modal_bg_color);
+    mix-blend-mode: revert;
+    backdrop-filter: brightness(var(--bright_modal)) blur(var(--modal_blur_weight));
+    user-select:none;
+}
+
+.section__content.post_login > .stock-card > .stock-card__name:hover {
+    backdrop-filter: brightness(1.2) blur(0);
+    color: transparent;
+    user-select: none;
+}
+
+.add_stock {
+    width: 45px;
+    height: 45px;
+    border-radius: 50px;
+    background-color: var(--add_button__color);
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    color: var(--nav_color);
+    top: -23px;
+    border: 3px solid var(--nav_color);
+}
+
+.add_stock::after {
+    content: "+";
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 4.6rem;
+    font-weight: bolder;
+}
+
+.add_stock:hover {
+    filter: brightness(var(--bright_button));
+}
+
+.add_stock:active {
+    transform: scale(0.8);
+}
+
+/* sección de formulario addición */
+.modal__addStock > .plain_panel {
+    flex-direction: row;
+}
+
+.modal__addStock > .plain_panel > .section__title,
+.modal__addStock > .plain_panel > .section__description {
+    margin-bottom: 0;
+    width: 100%;
+    max-width: 100%;
+}
+
+.modal__addStock > .plain_panel > .section__title {
+    width: 30%;
+    text-align: center;
+    font-size: 6.6rem;
+}
+
+.modal__addStock > .plain_panel > .section__description {
+    height: 100%;
+    width: 80%;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.form__addStock-content {
+    height: 100%;
+    width: 90%;
+    background-color: var(--add_stock_modal_bg);
+    border: 5px inset var(--add_stock_modal_bg);
+    border-radius: 0px 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 12px;
+    position: relative;
+}
+
+#form__stock-add {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+#form__stock-add label {
+    align-self: end;
+    font-family: sans-serif, Arial, Helvetica;
+    font-weight: bold;
+    font-size: 2.6rem;
+}
+
+#form__stock-add input[type="text"] {
+    border-radius: 7px;
+    font-size: 2.6rem;
+    padding-left: 20px;
+    width: 60%;
+    height: 4rem;
+    outline: none;
+    border: none;
+    font-weight: normal;
+    font-family: sans-serif, Helvetica, Arial;
+    color: var(--add_stock_input_text);
+    background-color: var(--add_stock_input_bg);
+    margin-left: 50px;
+}
+
+#form__stock-add input[type="text"]::placeholder {
+    font-weight: normal;
+    font-family: sans-serif, Helvetica, Arial;
+    color: var(--nav_color_hover);
+}
+
+#form__stock-add input[type="text"]:hover,
+#form__stock-add input[type="text"]:focus,
+#form__stock-add input[type="text"]:active {
+    filter: brightness(var(--add_stock_input_bright));
+}
+
+#form__stock-add input[type="text"]:focus,
+#form__stock-add input[type="text"]:active {
+    border: 1px solid var(--nav_color);
+}
+
+
+#form__stock-add input[type="file"] {
+    display: none;
+}
+
+#form__stock-add .upload-file__interfaz {
+    margin-left: 50px;
+    border-radius: 10px;
+    height: 4rem;
+    width: 60%;
+    display: grid;
+    grid-template-columns: 43% 57%;
+}
+
+#form__stock-add .upload-file__interfaz .upload-file__button-load {
+    padding: 9px;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--select_file_bg);
+    border-radius: 10px 0 0 10px;
+    font-size: 1.6rem;
+    gap: 5px;
+}
+
+#form__stock-add .upload-file__interfaz .upload-file__button-load:hover,
+#form__stock-add .upload-file__interfaz .upload-file__button-load:hover ~ .upload-file__filename {
+    filter: brightness(var(--add_stock_input_bright));
+}
+
+#form__stock-add .upload-file__filename {
+    width: 100%;
+    background-color: var(--add_stock_input_bg);
+    border-radius: 0 10px 10px 0;
+    font-family: sans-serif, Arial, Helvetica;
+    font-weight: normal;
+    font-size: 1.6rem;
+    contain: content;
+    overflow: hidden;
+    line-height: 4rem;
+    display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding-left: 10px;
+}
+
+#form__stock-add > .form__first_step,
+#form__stock-add > .form__second_step {
+    position: absolute;
+    width: 100%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: space-between;
+}
+
+.collapse {
+    visibility: collapse;
+}
+
+.errors-content {
+    position: absolute;
+    width: 30%;
+    height: 100px;
+    border-radius: 20px 40px;
+    top: 20px;
+    left: 15px;
+    overflow-y: auto;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+    font-size: 1.6rem;
+    font-family: sans-serif, Arial, Helvetica;
+    font-weight: bold;
+    color: var(--form_error_color);
+    background-color: var(--nav_bg_color);
+    backdrop-filter: blur(var(--nav_blur_weight));
+    z-index: 2;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.errors-content::-webkit-scrollbar {
+    display: none;
+}
+
+.errors-content > ul {
+    height: 100%;
+}
+
+.errors-content > ul > li {
+    list-style: square;
+    margin-left: 20px;
+    color: var(--form_error_color);
+}
+
+.errors-content > ul > li li {
+    list-style: disc;
+    margin-left: 20px;
+    color: var(--text_color);
+}
+
+.errors-content > ul > li li:last-child {
+    margin-bottom: 10px;
+}
+
+.form__addStock-content .button__model {
+    min-width: 150px;
+    min-height: 150px;
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+}
+
+.form__addStock-content .button__model .button__color-layer {
+    background-color: var(--button_addStock_color_layer);
+}
+
