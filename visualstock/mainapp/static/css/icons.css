@@ -43,6 +43,9 @@
 .icon-mug:before {
   content: "\e9a2";
 }
+.icon-bin:before {
+  content: "\e9ac";
+}
 .icon-eye:before {
   content: "\e9ce";
 }

@@ -22,6 +22,8 @@
     --form_error_color: rgb(183 57 57);
     --popup_success-message_bg_color: rgba(0,217,12,0.25);
     --popup_info-message_bg_color: rgba(0,121,217,0.25);
+    --popup_error-message_bg_color: rgba(217, 145, 0, 0.25);
+    --popup_warning-message_bg_color: rgba(217, 0, 0, 0.25);
     --stock-card__color: #202834;
     --add_button__color: #161a2c;
     --add_stock_modal_bg: rgba(32, 7, 69, 0.556);
@@ -29,6 +31,14 @@
     --add_stock_input_bg: rgba(192, 192, 192, 0.278);
     --add_stock_input_bright: 1.2;
     --select_file_bg: rgb(57, 39, 84);
+    --delete_button_bg: darkred;
+    --edit_button_bg: rgb(47, 101, 6);
+    --delete_password_bg: rgba(192, 192, 192, 0.69);
+    --delete_password_placeholder: rgb(98, 95, 105);
+    --delete_endButton_bg: rgb(80 10 10);
+    --edit_endButton_bg: rgb(10, 80, 46);
+    --delete_endButton_color: rgb(214, 214, 214);
+    --edit_endButton_color: rgb(214, 214, 214);
 }
 
 body {

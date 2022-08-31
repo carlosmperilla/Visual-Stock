@@ -5,7 +5,7 @@
     <label for="addStockCheck">
         <div class="button__model modal__close-button"><div class="button__color-layer"></div><span class="button__text icon-close"></span><span class="button__hide-icon icon-close"></span></div>
     </label>
-    <button class="" onclick=""></button>
+    <button class="back-arrow collapse" onclick="BackToStepOne()" title="Retroceder">⬅</button>
     <div class="errors-content collapse">
         <ul class="ul__stock-add--errors"></ul>
     </div>
@@ -13,7 +13,7 @@
     <div class="section__description">
         <div class="form__addStock-content">
 
-            <form id="form__stock-add" action="" method="post" enctype="multipart/form-data">
+            <form id="form__stock-add" action="{% url 'addStock' %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="form__first_step">
                     {% for field in stock_step_one %}
@@ -35,10 +35,17 @@
                         {{ field }}
                     {% endfor %}
                 </div>
+                <button tabindex="6" type="button" class="button__optional-columns collapse" title="Mostrar columnas adicionales" onclick="showOptionalColumns()">⬇</button>
+                <div class="form__optional_step collapse">
+                    {% for field in stock_optional %}
+                        <label for="{{ field.auto_id }}">{{ field.label }}</label>
+                        {{ field }}
+                    {% endfor %}
+                </div>
                 <datalist id="columnoptions"></datalist>
             </form>
         
-            <button class="button__model" type="button" form="form__stock-add" formenctype="multipart/form-data" onclick="ProcesarDatos()"><div class="button__color-layer"></div><span class="button__text">Subir Stock</span><span class="button__hide-icon icon-upload"></span></button>
+            <button tabindex="12" class="button__model" type="button" form="form__stock-add" formenctype="multipart/form-data" onclick="ProcesarDatos()"><div class="button__color-layer"></div><span class="button__text">Seguir</span><span class="button__hide-icon button__special-arrow"></span></button>
         </div>
     </div>
 </div>

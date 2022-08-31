@@ -15,7 +15,7 @@
             <form id="form__login" action="" method="post">
                 {% csrf_token %}
                 {% for field in login_form %}
-                    <label for="{{ field.name }}">
+                    <label for="{{ field.auto_id }}">
                         {{ field }}
                         <span class="input__effect"></span>
                     </label>

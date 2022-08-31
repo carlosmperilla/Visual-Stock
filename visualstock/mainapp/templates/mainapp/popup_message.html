@@ -3,9 +3,13 @@
     <input type="checkbox" id="closePopUp">
     <div class="popup_message  
                     {% if message.level == 25 %} 
-                        success_level 
+                        success_level
                     {% elif message.level == 20 %} 
-                        info_level 
+                        info_level
+                    {% elif message.level == 30 %} 
+                        warning_level
+                    {% elif message.level == 40 %} 
+                        error_level
                     {% endif %}">
         {{ message | safe }}
         <label for="closePopUp">

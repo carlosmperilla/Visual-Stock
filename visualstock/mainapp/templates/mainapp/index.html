@@ -7,27 +7,21 @@
 
 {% block content %}
     {% if request.user.is_authenticated %}
-        {% include 'mainapp/index_authenticated.html' %}
+        {% include 'mainapp/index_state/index_authenticated.html' %}
     {% else %}
-        {% include 'mainapp/index_not_authenticated.html' %}
+        {% include 'mainapp/index_state/index_not_authenticated.html' %}
     {% endif %}
 {% endblock content %}
 
 {% block scripts %}
     {% if request.user.is_authenticated %}
-        <script>
-            function openAddStockModal() {
-                var AddStockCheck = document.getElementById("addStockCheck");
-                var firstTextInput = document.querySelector("#form__stock-add input[type='text']");
-                addStockCheck.checked = true;
-                firstTextInput.focus();
-            }
-            function uploadFilePutName(target) {
-                var selectorFileNameTextBox = "#"+target.id+" ~ .upload-file__interfaz .upload-file__filename";
-                var UploadFileNameField = document.querySelector(selectorFileNameTextBox);
-                UploadFileNameField.innerHTML = target.files[0].name;
-            }
-        </script>
+        <script>const url_add_stock = "{% url 'addStock' %}";</script>
         <script src="{% static '/js/addStockInteractive.js'%}"></script>
+        {% if mode == 1 %}
+            <script src="{% static 'js/displayEditStock.js' %}"></script>
+        {% endif %}
+        {% if mode == 2 %}
+            <script src="{% static 'js/displayDeleteStock.js' %}"></script>
+        {% endif %}
     {% endif %}
 {% endblock scripts %}

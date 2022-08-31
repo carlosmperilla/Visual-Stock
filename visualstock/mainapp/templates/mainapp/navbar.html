@@ -1,0 +1,68 @@
+<nav class="{% if request.user.is_authenticated %}nav__post-login{% endif %}"">
+    <ul>
+    {% if not is_index %}
+        <li>
+            <a href="{% url 'index' %}"><span class="icon-home3"></span> Inicio</a>
+        </li>
+    {% endif %}
+    {% if request.user.is_authenticated %}
+        {% if is_stock %}
+            <li>
+                Ver como
+            </li>
+            <li>
+                Importar/Actualizar Imagenes
+            </li>
+        {%  endif %}
+        <li class="li__created-stocks">
+            Stocks Creados
+            <div class="submenu__triangle-draw"></div>
+            <ul class="ul__stocks">
+                {% for stock in stocks %}
+                    <li class="li__stock">
+                        <a href="{% url 'stock:stock' stock.name %}">{{ stock.name }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </li>
+        <li class="li__modes-stocks">
+           Modos
+            <div class="submenu__triangle-draw"></div>
+            <ul class="ul__modes">
+                {% if not mode == 1 %}
+                    <li class="li__mode" title="Para editar Stocks">
+                        <a href="{% url 'index'%}?mode=1">Edición</a>
+                    </li>
+                {% endif %}
+                {% if not mode == 2 %}
+                    <li class="li__mode" title="Para eliminar Stocks">
+                        <a href="{% url 'index'%}?mode=2"><span class="icon-bin"></span>&nbsp;Eliminación</a>
+                    </li>
+                {% endif %}
+                {% if not mode == 0 %}
+                    <li class="li__mode" title="Para visualizar Stocks">
+                        <a href="{% url 'index'%}">Visualización</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </li>
+        <li class="li__user-button">
+           <span class="icon-user"></span>&nbsp;{{ user.username }}
+           <div class="submenu__triangle-draw"></div>
+           <ul class="ul__user-options">
+                <li class="li__user-option li__logout-option">
+                    <a href="{% url 'logout' %}?next={{ request.path_info }}">Cerrar Sesión</a>
+                </li>
+           </ul>
+        </li>
+    {% else %}
+        <li>
+            <a href="{% url 'signup' %}">Registrarse</a>
+        </li>
+        <li>
+            <a href="{% url 'login' %}">Iniciar Sesión</a>
+        </li>
+    {% endif %}
+    </ul> 
+</nav>
+<div class="bg_navbar"></div>

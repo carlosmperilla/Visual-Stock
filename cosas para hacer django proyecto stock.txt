@@ -1,0 +1,40 @@
+40 error
+25 exitoso
+
+* Ver si usar Clases en Las vistas y en que casos.
+* Arreglar el navbar al loggearse.
+* Pensar lo de clases y vistas para el indice despues del loggeo.
+* Maquetar por encima la muestra de stock.
+* ver como usar context_processors.
+
+* Formulario 1:
+
+* Añaidr Stock-Paso_1:
+** Name
+** Image
+** principal_file
+
+* Añadir Stock-Paso_2:
+** name_column
+** price_column
+** quantity_column
+
+* Editar Stock (image-name):
+** Name
+** Image
+
+-----------------------------------------------------------------------------
+
+* Cosas a realizar:
+*arreglar estilos para que se vean los objetos seleccionados con el tab. Y hacer un tab de salteo.
+*hacer productos en base a la tabla del stock añadido.
+*borrar archivos de media al editar o eliminar stocks.
+*Carlos: 12345
+*tester: QWE123###
+
+
+
+
+
+
+

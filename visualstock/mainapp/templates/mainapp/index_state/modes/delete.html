@@ -1,0 +1,11 @@
+<button title="Eliminar Stock" type="button" class="stock-card__delete-button icon-bin" onclick="getFormDeleteStock(this)"></button>
+<button title="Cancelar" type="button" class="stock-card__cancel_delete collapse" onclick="cancelDeleteStock(this)"></button>
+
+<form class="form__stock-delete collapse" id="form__stock-delete-{{ stock.name }}" action="{% url 'deleteStock' %}" method="post">
+    {% csrf_token %}
+    <input name="stock_id" type="hidden" value="{{ stock.id }}">
+    {% for field in delete_stock %}
+        {{ field }}
+    {% endfor %}
+    <input class="button--delete__end" form="form__stock-delete-{{ stock.name }}" type="submit" value="Eliminar {{ stock.name }}">
+</form>
