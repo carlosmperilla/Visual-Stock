@@ -1,9 +1,56 @@
+import json
+
 from django.shortcuts import render, redirect
+from django.http import JsonResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
+from .captcha_img_tag import generate_captcha
+
 from .forms import LoginForm, SignUpForm
+
+
+def renew_captcha(request):
+
+    if request.user.is_authenticated:
+        return redirect('index')
+
+    if request.method == 'POST':
+        
+        captcha_dict = generate_captcha()
+        request.session['captcha_error_counter'] = 0
+        request.session['captcha'] = captcha_dict['value']
+        
+        return JsonResponse({'captcha_img': captcha_dict['b64_data']})
+
+def review_captcha(request):
+
+    data = {}
+
+    if request.user.is_authenticated:
+        return redirect('index')
+
+    if request.method == 'POST':
+        captcha_session = request.session.get('captcha')
+        if captcha_session and request.body:
+            captcha_input = json.loads(request.body).get('captcha_input', '').strip()
+
+            if captcha_session == captcha_input:
+                return JsonResponse({'captcha_state': 'success'})
+        
+        
+        data = {'captcha_state': 'error'}
+        
+        if request.session.get('captcha_error_counter') < 2:
+            request.session['captcha_error_counter'] = request.session.get('captcha_error_counter') + 1
+        else:
+            captcha_dict = generate_captcha()
+            request.session['captcha_error_counter'] = 0
+            request.session['captcha'] = captcha_dict['value']
+            data['captcha_img'] = captcha_dict['b64_data']
+
+        return JsonResponse(data)
 
 # Create your views here.
 def singup_user(request):
@@ -11,11 +58,23 @@ def singup_user(request):
     if request.user.is_authenticated:
         return redirect('index')
 
+    if request.session.get('captcha'):
+        print(request.session.get('captcha', 0))
+    
     signup_form = SignUpForm()
 
     if request.method == 'POST':
-        signup_form = SignUpForm(request.POST)
+        captcha_session = request.session.get('captcha')
+        if not captcha_session:
+            return redirect('signup')
+        
+        captcha_input = request.POST.get('captcha', "").strip()
+        if captcha_session != captcha_input:
+            return redirect('signup')
+        else:
+            request.session['captcha'] = None
 
+        signup_form = SignUpForm(request.POST)
         if signup_form.is_valid():
             success_message_text = """
                 Te has 
@@ -27,6 +86,10 @@ def singup_user(request):
             login(request, user)
 
             return redirect('index')
+    
+    captcha_dict = generate_captcha()
+    request.session['captcha'] = captcha_dict['value']
+    request.session['captcha_error_counter'] = 0
 
     signup_form_errors = str(signup_form.errors)
     signup_form_errors = signup_form_errors.replace('__all__', 'Errores:')
@@ -37,6 +100,7 @@ def singup_user(request):
         'title' : 'Registro',
         'signup_form' : signup_form,
         'signup_form_errors' : signup_form_errors,
+        'captcha' : captcha_dict['b64_data']
     }
 
     return render(request, "users/signup.html", context)

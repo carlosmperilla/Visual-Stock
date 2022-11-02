@@ -32,6 +32,11 @@ var columnoptions = document.getElementById('columnoptions')
 var buttonform = document.querySelectorAll('[form="form__stock-add"]')[0]
 var backbutton = document.getElementsByClassName('back-arrow')[0]
 var optionalbutton = document.getElementsByClassName('button__optional-columns')[0]
+let closeButtonAS = document.querySelector(".modal__addStock .modal__close-button")
+let inputs_s_step = second_step.getElementsByTagName("input")
+let inputs_opt = optional_step.getElementsByTagName("input")
+let allLabelFS = first_step.querySelectorAll('label[tabindex]')
+let lastLabelFS = allLabelFS[allLabelFS.length-1]
 
 function fillErrorsBox(errors){
     Object.keys(errors).forEach(
@@ -212,13 +217,29 @@ function uploadFilePutName(target) {
     UploadFileNameField.innerHTML = target.files[0].name;
 }
 function enterForInterfaceButton(){
-    var buttons_generic = document.getElementsByClassName("upload-file__button-load")
+    var buttons_generic = document.querySelectorAll("#form__stock-add .upload-file__button-load")
     for (let button of buttons_generic){
-        button.addEventListener("keyup", (event) => {
-            if (event.key === "Enter") {
-              button.click()
-            }
-        })}
+        enterToClick(button, button)
     }
+}
 
+setNextFocus(second_step.lastElementChild, optionalbutton)
+setNextFocus(optional_step.lastElementChild, optionalbutton)
+
+setNextFocus(optionalbutton, backbutton)
+setNextFocus(backbutton, buttonform)
+setNextFocus(buttonform, closeButtonAS)
+
+setNextFocus(closeButtonAS, inputs_s_step[0])
+setNextFocus(closeButtonAS, inputs_opt[0])
+
+setPrevFocus(closeButtonAS, buttonform)
+setPrevFocus(buttonform, lastLabelFS)
+setPrevFocus(buttonform, backbutton)
+setPrevFocus(backbutton, optionalbutton)
+setPrevFocus(optionalbutton, inputs_s_step[inputs_s_step.length-1])
+setPrevFocus(optionalbutton, inputs_opt[inputs_opt.length-1])
+
+enterToClick(closeButtonAS, closeButtonAS)
 enterForInterfaceButton()
+

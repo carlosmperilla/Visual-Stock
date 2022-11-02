@@ -1,4 +1,5 @@
 {% extends 'layouts/layout.html' %}
+{% load static %}
 
 {% block title %}
     Registro
@@ -20,11 +21,44 @@
                         <span class="input__effect"></span>
                     </label>
                 {% endfor %}
+                <input type="hidden" name="captcha">
             </form>
             <div class="center-button">
-                <button type="submit" form="form__signup" class="button__model button__signup"><span class="button__text">Registrarse</span><span class="button__hide-icon icon-user"></span></button>
+                <button onclick="showModalCaptcha()" class="button__model button__signup"><span class="button__text">Registrarse</span><span class="button__hide-icon icon-user"></span></button>
             </div>
         </div>
     </section>
 </section>
+
+
+<dialog class="d--modal">
+    <section class="plain_panel">
+        <button class="close__dialog" tabindex="3">Cerrar</button>
+        <h2 class="section__title">Complete el captcha</h2>
+        <section class="section__description" tabindex="1">
+            <p>Son seis letras y números, entre mayusculas y minusculas.</p>
+            <p>Tiene 3 intentos para un mismo captcha, al superar este número se renovará automáticamente.</p>
+
+            <div class="captcha--box__display">
+                <img id="captcha--img" src="{{ captcha }}" alt="captcha">
+                <button type="button" onclick="renewCaptcha()" tabindex="2">
+                    <span class="icon-loop2"></span>
+                </button>
+            </div>
+
+            <div class="captcha--box__input">
+                <input type="text" tabindex="1">
+                <button type="button" onclick="sendCaptcha()" tabindex="1">Finalizar</button>
+            </div>
+            <p class="captcha--state"></p>
+
+        </section>
+    </section>
+</dialog>
 {% endblock content %}
+
+{% block scripts %}
+    <script>const url_renew_captcha = "{% url 'renew_captcha' %}";</script>
+    <script>const url_review_captcha = "{% url 'review_captcha' %}";</script>
+    <script src="{% static '/js/captchaUse.js' %}"></script>
+{% endblock scripts %}

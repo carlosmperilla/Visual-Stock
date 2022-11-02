@@ -1,66 +1,136 @@
 <nav class="{% if request.user.is_authenticated %}nav__post-login{% endif %}"">
     <ul>
     {% if not is_index %}
-        <li>
-            <a href="{% url 'index' %}"><span class="icon-home3"></span> Inicio</a>
+        <li class="li__index">
+            <a href="{% url 'index' %}" tabindex="3"><span class="icon-home3"></span> Inicio</a>
         </li>
     {% endif %}
     {% if request.user.is_authenticated %}
-        {% if is_stock %}
-            <li>
-                Ver como
-            </li>
-            <li>
-                Importar/Actualizar Imagenes
-            </li>
-        {%  endif %}
-        <li class="li__created-stocks">
+        <li class="li__created-stocks" tabindex="3">
             Stocks Creados
             <div class="submenu__triangle-draw"></div>
             <ul class="ul__stocks">
                 {% for stock in stocks %}
                     <li class="li__stock">
-                        <a href="{% url 'stock:stock' stock.name %}">{{ stock.name }}</a>
+                        <a tabindex="3" href="{% url 'stock:stock' stock.name %}">{{ stock.name }}</a>
                     </li>
                 {% endfor %}
             </ul>
         </li>
-        <li class="li__modes-stocks">
-           Modos
-            <div class="submenu__triangle-draw"></div>
-            <ul class="ul__modes">
-                {% if not mode == 1 %}
-                    <li class="li__mode" title="Para editar Stocks">
-                        <a href="{% url 'index'%}?mode=1">Edición</a>
-                    </li>
-                {% endif %}
-                {% if not mode == 2 %}
-                    <li class="li__mode" title="Para eliminar Stocks">
-                        <a href="{% url 'index'%}?mode=2"><span class="icon-bin"></span>&nbsp;Eliminación</a>
-                    </li>
-                {% endif %}
-                {% if not mode == 0 %}
-                    <li class="li__mode" title="Para visualizar Stocks">
-                        <a href="{% url 'index'%}">Visualización</a>
-                    </li>
-                {% endif %}
-            </ul>
-        </li>
-        <li class="li__user-button">
+        {% if is_stock %}
+            <li class="li__modes-stocks" tabindex="3">
+                Modos
+                <div class="submenu__triangle-draw"></div>
+                <ul class="ul__modes">
+                    {% if not mode == 1 %}
+                        <li class="li__mode" title="Para editar productos">
+                            <a tabindex="3" href="{% url 'stock:stock' stock.name %}?mode=1">Edición</a>
+                        </li>
+                    {% endif %}
+                    {% if not mode == 2 %}
+                        <li class="li__mode" title="Para eliminar productos">
+                            <a tabindex="3" href="{% url 'stock:stock' stock.name %}?mode=2"><span class="icon-bin"></span>&nbsp;Eliminación</a>
+                        </li>
+                    {% endif %}
+                    {% if not mode == 0 %}
+                        <li class="li__mode" title="Para visualizar productos">
+                            <a tabindex="3" href="{% url 'stock:stock' stock.name %}">Visualización</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </li>
+            <li class="li__backup-stocks" tabindex="3">
+                Respaldos
+                <div class="submenu__triangle-draw"></div>
+                <ul class="ul__backups">
+                    {% for stock in stocks %}
+                        
+                        {% if stock.backup.first_date %}
+                            <li class="li__backup">
+                                <a tabindex="3" href="{% url 'backup:toggle_backup' stock.name 1 %}">
+                                    <span class="icon-history"></span>&nbsp;{{ stock.backup.first_date}} - [Más antiguo]
+                                </a>
+                            </li>
+                        {% endif %}
+                        {% if stock.backup.second_date %}
+                            <li class="li__backup">
+                                <a tabindex="3" href="{% url 'backup:toggle_backup' stock.name 2 %}">
+                                    <span class="icon-history"></span>&nbsp;{{ stock.backup.second_date }} - [Antiguo]
+                                </a>
+                            </li>
+                        {% endif %}
+                        {% if stock.backup.third_date %}
+                                <li class="li__backup">
+                                    <a tabindex="3" href="{% url 'backup:toggle_backup' stock.name 3 %}">
+                                    <span class="icon-history"></span>&nbsp;{{ stock.backup.third_date}} - [Reciente]
+                                </a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </li>
+        {%  endif %}
+        {% if is_index %}
+            <li class="li__modes-stocks" tabindex="3">
+            Modos
+                <div class="submenu__triangle-draw"></div>
+                <ul class="ul__modes">
+                    {% if not mode == 1 %}
+                        <li class="li__mode" title="Para editar Stocks">
+                            <a tabindex="3" href="{% url 'index'%}?mode=1">Edición</a>
+                        </li>
+                    {% endif %}
+                    {% if not mode == 2 %}
+                        <li class="li__mode" title="Para eliminar Stocks">
+                            <a tabindex="3" href="{% url 'index'%}?mode=2"><span class="icon-bin"></span>&nbsp;Eliminación</a>
+                        </li>
+                    {% endif %}
+                    {% if not mode == 0 %}
+                        <li class="li__mode" title="Para visualizar Stocks">
+                            <a tabindex="3" href="{% url 'index'%}">Visualización</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </li>
+            <li class="li__backup-stocks" tabindex="3">
+                Descargar Original
+                    <div class="submenu__triangle-draw"></div>
+                    <ul class="ul__backups">
+                        {% for stock in stocks %}
+                            <li class="li__backup">
+                                <a tabindex="3" href="{{ stock.principal_file.url }}" download><span class="icon-floppy-disk"></span>&nbsp;{{ stock.name }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+                <li class="li__backup-stocks" tabindex="3">
+                Exportar .csv
+                    <div class="submenu__triangle-draw"></div>
+                    <ul class="ul__backups">
+                        {% for stock in stocks %}
+                            <li class="li__backup">
+                                <a tabindex="3" href="{% url 'stock_to_csv' stock.name %}"><span class="icon-download"></span>&nbsp;{{ stock.name }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+
+        {% endif %}
+        <li class="li__user-button" tabindex="3">
            <span class="icon-user"></span>&nbsp;{{ user.username }}
            <div class="submenu__triangle-draw"></div>
            <ul class="ul__user-options">
                 <li class="li__user-option li__logout-option">
-                    <a href="{% url 'logout' %}?next={{ request.path_info }}">Cerrar Sesión</a>
+                    <a tabindex="3" href="{% url 'logout' %}?next={% url 'index' %}">Cerrar Sesión</a>
                 </li>
            </ul>
         </li>
     {% else %}
         <li>
-            <a href="{% url 'signup' %}">Registrarse</a>
+            <a href="{% url 'signup' %}" tabindex="3">Registrarse</a>
         </li>
         <li>
-            <a href="{% url 'login' %}">Iniciar Sesión</a>
+            <a href="{% url 'login' %}" tabindex="3">Iniciar Sesión</a>
         </li>
     {% endif %}
     </ul> 

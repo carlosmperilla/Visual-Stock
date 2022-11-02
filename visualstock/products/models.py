@@ -1,15 +1,20 @@
+import uuid
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
-from django.utils.text import slugify
 from django.db.models.signals import pre_save
-from stock.models import Stock
+
+from .receivers import (
+                        set_product_availability,
+                        set_unique_slug,
+                        set_compressed_image
+                        )
+
 
 # Create your models here.
 class Product(models.Model):
     name = models.CharField(max_length=50, verbose_name="Nombre")
     slug = models.SlugField(null=False, blank=False, unique=True, verbose_name="Nombre unico de producto")
-    image = models.ImageField(null=True, upload_to="Images/%Y/%m/%d/", max_length=100, verbose_name="Imagen")
-
+    image = models.ImageField(null=True, upload_to=f"Images/%Y/%m/%d/{uuid.uuid4().hex}/", max_length=100, verbose_name="Imagen")
     price = models.DecimalField(max_digits=8, decimal_places=2)
     quantity = models.IntegerField(verbose_name="Cantidad", validators=[MinValueValidator(-99999999), MaxValueValidator(99999999)])
     category = models.CharField(blank=True, default="", max_length=50, verbose_name="Categoria")
@@ -20,7 +25,7 @@ class Product(models.Model):
     added_date = models.DateTimeField(auto_now_add=True, verbose_name="Creado el")
     updated_date = models.DateTimeField(auto_now=True, verbose_name='Editado el')
         
-    stock = models.ForeignKey(Stock, editable=True, verbose_name='Stock', on_delete=models.CASCADE)
+    stock = models.ForeignKey('stock.Stock', editable=True, verbose_name='Stock', on_delete=models.CASCADE, related_name="products")
 
     class Meta:
         verbose_name = "Producto"
@@ -28,14 +33,12 @@ class Product(models.Model):
         ordering = ['name']
 
     def __str__(self):
-        return self.name
+        return self.slug
 
-    def save(self, *args, **kwargs):
-        self.slug = slugify(self.name)
-        super(Product, self).save(*args, **kwargs)
+    def additional_as_list(self):
+        return self.additional.split(',')
 
-def set_product_not_avaliable(sender, instance, *args, **kwargs):
-    if instance.quantity <= 0:
-        instance.avaliable = False
 
-pre_save.connect(set_product_not_avaliable, sender=Product)
+pre_save.connect(set_product_availability, sender=Product)
+pre_save.connect(set_unique_slug, sender=Product)
+pre_save.connect(set_compressed_image, sender=Product)

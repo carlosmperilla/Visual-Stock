@@ -6,6 +6,7 @@ from django.core.exceptions import ValidationError
 from stock.models import Stock
 from stock.forms import AddStockStepOne, AddStockStepTwo, AddStockOptional
 
+
 def read_column_names(principal_file):
     column_names = principal_file.readline().decode('utf-8').strip().split(',')
     principal_file.seek(0)
@@ -36,7 +37,6 @@ def validate_stock_step_two(request, data):
         stock_step_two = AddStockStepTwo(request.POST)
         stock_optional = AddStockOptional(request.POST)
         if stock_step_two.is_valid() and stock_optional.is_valid():
-            print("PASO AL DOS!!!!!!!!!!!!!!!")
             stock_optional_noblank = [field for field in stock_optional if field.value() != ""]
             errors = inconsistent_columns(request, [*stock_step_two, *stock_optional_noblank], data)
             if errors:
@@ -54,6 +54,8 @@ def validate_stock_step_two(request, data):
                             )
                 try:
                     stock.save()
+                    stock.extract_products()
+                    stock.set_current_backup()
                     data['redirect_url'] = reverse('index')
                 except ValidationError as e:
                     data['errors'] = json.dumps({'General': [{'message': e.message}]})
@@ -76,7 +78,6 @@ def validate_stock(request):
         data = {
             'column_names' : column_names
         }
-
         validate_stock_step_two(request, data)
 
     else:

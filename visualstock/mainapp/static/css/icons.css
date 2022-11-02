@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('../fonts/icomoon.eot?s3u9vj');
-  src:  url('../fonts/icomoon.eot?s3u9vj#iefix') format('embedded-opentype'),
-    url('../fonts/icomoon.ttf?s3u9vj') format('truetype'),
-    url('../fonts/icomoon.woff?s3u9vj') format('woff'),
-    url('../fonts/icomoon.svg?s3u9vj#icomoon') format('svg');
+  src:  url('../fonts/icomoon.eot?oe7ozx');
+  src:  url('../fonts/icomoon.eot?oe7ozx#iefix') format('embedded-opentype'),
+    url('../fonts/icomoon.ttf?oe7ozx') format('truetype'),
+    url('../fonts/icomoon.woff?oe7ozx') format('woff'),
+    url('../fonts/icomoon.svg?oe7ozx#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -28,8 +28,23 @@
 .icon-home3:before {
   content: "\e902";
 }
+.icon-newspaper:before {
+  content: "\e904";
+}
+.icon-images:before {
+  content: "\e90e";
+}
+.icon-file-zip:before {
+  content: "\e92b";
+}
 .icon-address-book:before {
   content: "\e944";
+}
+.icon-history:before {
+  content: "\e94d";
+}
+.icon-download:before {
+  content: "\e960";
 }
 .icon-upload:before {
   content: "\e961";
@@ -60,4 +75,13 @@
 }
 .icon-exit:before {
   content: "\ea14";
+}
+.icon-table:before {
+  content: "\ea70";
+}
+.icon-table2:before {
+  content: "\ea71";
+}
+.icon-loop2:before {
+  content: "\ea2e";
 }

@@ -11,6 +11,8 @@ function getFormEditStock(target){
     formEdit.classList.remove("collapse")
     cancelButton.classList.remove("collapse")
 
+    formEdit.querySelector("input[type='text']").focus()
+
 }
 
 function cancelEditStock(target){

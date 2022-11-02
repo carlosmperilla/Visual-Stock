@@ -1,6 +1,9 @@
+import csv
+from turtle import update
+
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.core.exceptions import ValidationError
 
 from stock.models import Stock
@@ -11,6 +14,7 @@ from django.contrib.auth.hashers import check_password
 
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.utils import timezone
 
 # Create your views here.
 def index(request):
@@ -50,12 +54,15 @@ def editStock(request):
             previous_name = stock_to_edit.name
             name = request.POST.get("name")
             image = request.FILES.get("image")
+            update_fields = []
             if name:
                 stock_to_edit.name = name
+                update_fields.append('name')
             if image:
                 stock_to_edit.image = request.FILES.get("image")
+                update_fields.append('image')
             try:
-                stock_to_edit.save()
+                stock_to_edit.save(update_fields=update_fields)
                 messages.success(request, f"Editado correctamente: {previous_name} ===> {stock_to_edit.name}")
             except ValidationError as e:
                 messages.error(request, e.message)
@@ -82,3 +89,40 @@ def deleteStock(request):
 
         index_delete_mode = reverse('index')+'?mode=2'
         return redirect(index_delete_mode)
+
+@login_required
+def stock_to_csv(request, stock_name):
+    stocks = Stock.objects.filter(user__pk=request.user.pk)
+    stock_by_name = get_object_or_404(stocks, name=stock_name)
+    category = bool(stock_by_name.category_column)*stock_by_name.category_column+(not bool(stock_by_name.category_column))*"Categoria"
+
+    response = HttpResponse(
+        content_type='text/csv',
+        headers={'Content-Disposition': f'attachment; filename="{stock_name}-{timezone.now().date()}.csv"'},
+    )
+
+    writer = csv.writer(response)
+
+    titles =  [stock_by_name.name_column, 
+                    stock_by_name.price_column, 
+                    stock_by_name.quantity_column, 
+                    "Disponible", 
+                    category,
+                    stock_by_name.added_date_column, 
+                    stock_by_name.updated_date_column] + stock_by_name.additional_column_as_list()
+
+    writer.writerow(titles)
+    products = stock_by_name.products.all()
+    for product in products:
+        avaliable = product.available*"✓"+(not product.available)*"X"
+        writer.writerow(
+                        [product.name, 
+                        product.price, 
+                        product.quantity, 
+                        avaliable, 
+                        product.category, 
+                        product.added_date, 
+                        product.updated_date] + product.additional_as_list()
+                        )
+
+    return response

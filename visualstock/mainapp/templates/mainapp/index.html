@@ -15,8 +15,8 @@
 
 {% block scripts %}
     {% if request.user.is_authenticated %}
-        <script>const url_add_stock = "{% url 'addStock' %}";</script>
-        <script src="{% static '/js/addStockInteractive.js'%}"></script>
+    <script>const url_add_stock = "{% url 'addStock' %}";</script>
+    <script src="{% static '/js/addStockInteractive.js'%}"></script>
         {% if mode == 1 %}
             <script src="{% static 'js/displayEditStock.js' %}"></script>
         {% endif %}

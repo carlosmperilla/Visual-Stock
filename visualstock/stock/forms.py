@@ -76,7 +76,7 @@ class AddStockStepTwo(ModelForm):
         for tabindex, field in enumerate(self.fields, 4):
             self.fields[field].widget.attrs.update({
                 'placeholder': self.generate_placeholder(self.fields[field].label),
-                'tabindex': tabindex,
+                'tabindex': 1,
                 'list' : 'columnoptions',
             })
 
@@ -110,7 +110,7 @@ class AddStockOptional(ModelForm):
         for tabindex, field in enumerate(self.fields, 7):
             self.fields[field].widget.attrs.update({
                 'placeholder': self.generate_placeholder(self.fields[field].label),
-                'tabindex': tabindex,
+                'tabindex': 1,
                 'list' : 'columnoptions',
             })
 
@@ -127,7 +127,7 @@ class DeleteStock(forms.Form):
                                 required=True,
                                 label = "Contraseña de Usuario",
                                 widget=forms.PasswordInput(
-                                    attrs={'type':'password', 'name': 'password','placeholder':'Contraseña de Usuario'}
+                                    attrs={'type':'password', 'name': 'password','placeholder':'Contraseña de Usuario', 'tabindex' : '1'}
                                     )
                                 )
 

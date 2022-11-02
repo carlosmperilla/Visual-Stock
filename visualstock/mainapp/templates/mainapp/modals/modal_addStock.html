@@ -2,10 +2,10 @@
     <div class="close_panel"></div>
 </label>
 <div class="plain_panel">
+    <button class="back-arrow collapse" onclick="BackToStepOne()" title="Retroceder" tabindex="1">⬅</button>
     <label for="addStockCheck">
-        <div class="button__model modal__close-button"><div class="button__color-layer"></div><span class="button__text icon-close"></span><span class="button__hide-icon icon-close"></span></div>
+        <div class="button__model modal__close-button" tabindex="1"><div class="button__color-layer"></div><span class="button__text icon-close"></span><span class="button__hide-icon icon-close"></span></div>
     </label>
-    <button class="back-arrow collapse" onclick="BackToStepOne()" title="Retroceder">⬅</button>
     <div class="errors-content collapse">
         <ul class="ul__stock-add--errors"></ul>
     </div>
@@ -23,7 +23,7 @@
                         {{ field }}
                         {% if field.field.widget.input_type == 'file' %}
                             <div class="upload-file__interfaz">
-                                <label for="{{ field.auto_id }}" class="upload-file__button-load" tabindex="{{ forloop.counter }}"><span class="upload-file__button-icon icon-upload"></span class="upload-file__button-text"><span>Subir Archivo</span></label>
+                                <label for="{{ field.auto_id }}" class="upload-file__button-load" tabindex="1"><span class="upload-file__button-icon icon-upload"></span class="upload-file__button-text"><span>Subir Archivo</span></label>
                                 <span class="upload-file__filename"></span>
                             </div>
                         {% endif %}
@@ -35,7 +35,7 @@
                         {{ field }}
                     {% endfor %}
                 </div>
-                <button tabindex="6" type="button" class="button__optional-columns collapse" title="Mostrar columnas adicionales" onclick="showOptionalColumns()">⬇</button>
+                <button tabindex="1" type="button" class="button__optional-columns collapse" title="Mostrar columnas adicionales" onclick="showOptionalColumns()">⬇</button>
                 <div class="form__optional_step collapse">
                     {% for field in stock_optional %}
                         <label for="{{ field.auto_id }}">{{ field.label }}</label>
@@ -45,7 +45,7 @@
                 <datalist id="columnoptions"></datalist>
             </form>
         
-            <button tabindex="12" class="button__model" type="button" form="form__stock-add" formenctype="multipart/form-data" onclick="ProcesarDatos()"><div class="button__color-layer"></div><span class="button__text">Seguir</span><span class="button__hide-icon button__special-arrow"></span></button>
+            <button tabindex="1" class="button__model" type="button" form="form__stock-add" formenctype="multipart/form-data" onclick="ProcesarDatos()"><div class="button__color-layer"></div><span class="button__text">Seguir</span><span class="button__hide-icon button__special-arrow"></span></button>
         </div>
     </div>
 </div>

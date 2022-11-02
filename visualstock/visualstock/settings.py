@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'mainapp.apps.MainappConfig',
     'stock.apps.StockConfig',
     'products.apps.ProductsConfig',
+    'backup.apps.BackupConfig',
     'users.apps.UsersConfig',
     'django.contrib.admin',
     'django.contrib.auth',

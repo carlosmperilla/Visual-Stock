@@ -1,4 +1,4 @@
-<button onclick="openAddStockModal()" class="add_stock" title="Añadir Stock"></button>
+<button onclick="openAddStockModal()" class="add_stock" title="Añadir Stock" tabindex="1"></button>
 <section class="container__stocks">
     <section class="section__content post_login">
         {{ objeto }}
@@ -14,7 +14,7 @@
                     {% include 'mainapp/index_state/modes/delete.html' %}
                 {% endif %}
                 
-                <a href="{% url 'stock:stock' stock.name %}" class="stock-card__name">{{ stock.name }}</a>
+                <a href="{% url 'stock:stock' stock.name %}" class="stock-card__name" tabindex="1">{{ stock.name }}</a>
                 <img title="{{ stock.image.name }}" class="stock-card__image" src="{{ stock.image.url }}" alt="{{ stock.image.name }}" loading="lazy">
             </article>
         {% endfor %}

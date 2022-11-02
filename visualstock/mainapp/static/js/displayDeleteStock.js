@@ -25,6 +25,8 @@ function getFormDeleteStock(target){
     formDelete.classList.remove("collapse")
     cancelButton.classList.remove("collapse")
 
+    formDelete.querySelector("input[type='password']").focus()
+
 }
 
 function cancelDeleteStock(target){

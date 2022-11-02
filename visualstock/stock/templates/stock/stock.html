@@ -1,0 +1,130 @@
+{% extends 'layouts/layout.html' %}
+{% load static %}
+
+{% block title %}
+    {{ stock.name | capfirst }}
+{% endblock title %}
+
+{% block content %}
+
+    {% if mode == 1 %}
+        <div class="edit-button_box">
+            <button onclick="showDialogImportImages()" class="import-img--button" title="Importar/Actualizar imagenes" tabindex="1">Importar/Actualizar imagenes</button>
+            <button onclick="saveItems()" class="edit--button" title="Guardar edición" tabindex="1">Guardar cambios</button>
+        </div>
+    {% endif %}
+
+    {% if mode == 2 %}
+        <button onclick="deleteItems()" class="delete--button" title="Guardar edición" tabindex="1">
+            Eliminar&nbsp;<span class="delete--counter">0</span>&nbsp;productos
+        </button>
+    {% endif %}
+
+    <div class="content-table">
+        <table>
+            <thead>
+                <tr>
+                    {% if mode == 2 %}
+                        <th>ELIMINAR</th>
+                    {% endif %}
+                    <th>Imagen</th>
+                    <th>{{ stock.name_column }}</th>
+                    <th>{{ stock.price_column }}</th>
+                    <th>{{ stock.quantity_column }}</th>
+                    <th>Disponible</th>
+                    {% if stock.category_column %}
+                        <th>{{ stock.category_column }}</th>
+                    {% endif %}
+                    <th>{{ stock.added_date_column }}</th>
+                    <th>{{ stock.updated_date_column }}</th>
+                    {% if stock.additional_column %}
+                        {% for additional_column_name in stock.additional_column_as_list %}
+                            <th>{{ additional_column_name }}</th>
+                        {% endfor %}
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                    <tr>
+                        {% if mode == 1 %}
+                            <input type="hidden" value="{{ product.pk }}">
+                        {% endif %}
+                        {% if mode == 2 %}
+                                <td class="product--check-delete">
+                                    <label for="item-{{ product.pk }}">
+                                        <input type="checkbox" id="item-{{ product.pk }}" class="delete--item">
+                                    </label>
+                                </td>
+                        {% endif %}
+                        <td class="product--img">
+                            {% if product.image %}
+                                <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                            {% endif %}
+                        </td>
+                        <td class="product--name" {% if mode == 1 %}contenteditable{% endif %}>{{ product.name }}</td>
+                        <td class="product--price" {% if mode == 1 %}contenteditable{% endif %}>{{ product.price | floatformat:2 }}</td>
+                        <td class="product--quantity" {% if mode == 1 %}contenteditable{% endif %}>{{ product.quantity }}</td>
+                        <td class="{{ product.available | yesno:'available,noavailable' }} product--available">
+                            {{ product.available | yesno:"✓,X" }}
+                        </td>
+                        {% if stock.category_column %}
+                            <td class="product--category" {% if mode == 1 %}contenteditable{% endif %}>{{ product.category }}</td>
+                        {% endif %}
+                        <td>{{ product.added_date }}</td>
+                        <td>{{ product.updated_date }}</td>
+                        {% if stock.additional_column %}
+                            {% for additional_value in product.additional_as_list %}
+                                <td>{{ additional_value | default:"-" }}</td>
+                            {% endfor %}
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+    <dialog class="d--modal">
+        <section class="plain_panel">
+            <h2 class="section__title">Importar/Actualizar Imagenes</h2>
+            <section class="section__description" tabindex="1">
+                <p>Para importar o actualizar imagenes, sus imagenes deben tener <strong>el mismo nombre que el producto.</strong></p>
+                <p>Se dispone de dos opciones, cargar un archivo zip con las imagenes ó cargar las imagenes directamente.</p>
+                <p>Las imagenes con nombres incorrectos seran ignoradas.</p>
+                <div class="button--container">
+                    <button onclick="uploadZip()" class="upload__import">
+                        <span class='icon-file-zip'></span>
+                        &nbsp;Importar Zip
+                    </button>
+                    <button onclick="uploadImages()" class="upload__import">
+                        <span class='icon-images'></span>
+                        &nbsp;Importar Imagenes
+                    </button>
+                    <button class="close__dialog">Cerrar</button>
+                </div>
+            </section>
+        </section>
+        <form id="form--import_images" action="{% url 'stock:importProductImages' stock.name %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for field in form_import_images %}
+                {{ field }}
+            {% endfor %}
+        </form>
+    </dialog>
+
+{% endblock content %}
+
+{% block scripts %}
+    {% if request.user.is_authenticated %}
+        {% if mode == 1 %}
+            <script>const url_edit_products = "{% url 'stock:editProducts' stock.name %}";</script>
+            <script src="{% static 'js/editTableStock.js' %}"></script>
+            <script src="{% static 'js/importImages.js' %}"></script>
+        {% endif %}
+        {% if mode == 2 %}
+            <script>const url_delete_products = "{% url 'stock:deleteProducts' stock.name %}";</script>
+            <script src="{% static 'js/deleteItemTableStock.js' %}"></script>
+        {% endif %}
+    {% endif %}
+{% endblock scripts %}

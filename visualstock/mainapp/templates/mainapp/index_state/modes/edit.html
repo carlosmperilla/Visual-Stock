@@ -1,17 +1,18 @@
-<button title="Editar Stock" type="button" class="stock-card__edit-button" onclick="getFormEditStock(this)">Editar</button>
-<button title="Cancelar" type="button" class="stock-card__cancel_edit collapse" onclick="cancelEditStock(this)"></button>
+<button title="Editar Stock" type="button" class="stock-card__edit-button" onclick="getFormEditStock(this)" tabindex="1">Editar</button>
 
 <form class="form__stock-edit collapse" id="form__stock-edit-{{ stock.name }}" action="{% url 'editStock' %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <input name="stock_id" type="hidden" value="{{ stock.id }}">
     {% for field in edit_stock %}
-        {{ field }}
-        {% if field.field.widget.input_type == 'file' %}
-            <div class="upload-file__interfaz">
-                <button type="button" onclick="getFile(this)" class="upload-file__button-load" tabindex="{{ forloop.counter }}"><span class="upload-file__button-icon icon-upload"></span class="upload-file__button-text"><span>Subir Imagen</span></button>
-                <span class="upload-file__filename"></span>
-            </div>
-        {% endif %}
+    {{ field }}
+    {% if field.field.widget.input_type == 'file' %}
+    <div class="upload-file__interfaz">
+        <button type="button" onclick="getFile(this)" class="upload-file__button-load" tabindex="1"><span class="upload-file__button-icon icon-upload"></span class="upload-file__button-text"><span>Subir Imagen</span></button>
+        <span class="upload-file__filename"></span>
+    </div>
+    {% endif %}
     {% endfor %}
-    <input class="button--edit__end" form="form__stock-edit-{{ stock.name }}" tabindex="3" type="submit" value="Editar {{ stock.name }}">
+    <input class="button--edit__end" form="form__stock-edit-{{ stock.name }}" tabindex="1" type="submit" value="Editar {{ stock.name }}">
 </form>
+
+<button tabindex="1" title="Cancelar" type="button" class="stock-card__cancel_edit collapse" onclick="cancelEditStock(this)"></button>

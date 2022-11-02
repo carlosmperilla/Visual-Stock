@@ -39,7 +39,21 @@
     --edit_endButton_bg: rgb(10, 80, 46);
     --delete_endButton_color: rgb(214, 214, 214);
     --edit_endButton_color: rgb(214, 214, 214);
+    --table_even_row_bg: #424242;
+    --table-thead_bg: rgba(39, 49, 84, 0.68);
+    --table-card-border: #eadede;
+    --table-card-body: #1d0945f2;
+    --table-card-quantity: #3a1e73f2;
+    --table-card-name: rgba(119, 99, 167, 0.24);
+    --table-edit-border: #b94400;
 }
+
+::backdrop {
+    --modal_bg_color: rgba(105, 138, 190, 0.5);
+    --bright_modal: 0.7;
+    --modal_blur_weight: 5px;
+}
+  
 
 body {
     background-image: url("../imgs/background_pattern_dark.jpg");
