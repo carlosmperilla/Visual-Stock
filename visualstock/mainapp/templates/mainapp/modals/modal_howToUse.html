@@ -7,167 +7,215 @@
     </label>
     <h2 class="section__title">¿Cómo usar?</h2>
     <div class="section__description" tabindex="1">
-        <h3>Funcionalidad Visual Stock</h3>
-        <p>
-            Permite visualizar stocks de productos, gastos, etcétera en formato tanto de tabla, como de tarjetas.
-        </p>
-        <p>
-            Permite una edición rápida de los datos críticos, añadir imágenes guía para los productos, eliminar productos innecesarios.
-        </p>
-        <p>
-            Además de contar con un sistema de restauración de cambios. El acceso a los múltiples stocks por usuario es práctico y dinámico.
-        </p>
 
-        <h3>No molestar <span class="icon-eye"></span></h3>
-        <p>
-            Oculta el encabezado y el pie de página. Para enfocarse en la visualización de los productos.
-        </p>
+        <details>
+            <summary><h3>Funcionalidad Visual Stock</h3></summary>
+            <p>
+                Permite visualizar stocks de productos, gastos, etcétera en formato tanto de tabla, como de tarjetas.
+            </p>
+            <p>
+                Permite una edición rápida de los datos críticos, añadir imágenes guía para los productos, eliminar productos innecesarios.
+            </p>
+            <p>
+                Además de contar con un sistema de restauración de cambios. El acceso a los múltiples stocks por usuario es práctico y dinámico.
+            </p>
+        </details>
+        
+        <details>
+            <summary>
+                <h3>No molestar <span class="icon-eye"></span></h3>
+            </summary>
+            <p>
+                Oculta el encabezado y el pie de página. Para enfocarse en la visualización de los productos.
+            </p>
+    
+        </details>
 
-        <h3>Modo claro/Modo oscuro <span class="icon-contrast"></span></h3>            
-        <p>
-            Alterna entre modo oscuro y claro.
-        </p>
+        <details>
+            <summary>
+                <h3>Modo claro/Modo oscuro <span class="icon-contrast"></span></h3>            
+            </summary>
+            <p>
+                Alterna entre modo oscuro y claro.
+            </p>
+        </details>
 
-        <h3>Tabla visualización <span class="icon-table"></span> <span class="icon-table2"></span> <span class="icon-newspaper"></span></h3>
-        <ul>
-            <li>
-               <strong>Primer modo:</strong> Tabla clásica.
-            </li>
-            <li>
-                <strong>Segundo modo:</strong> Tabla con filas separadas.
-            </li>
-            <li>
-                <strong>Tercer modo:</strong> Tabla simplificada por datos críticos en tarjetas.
-            </li>
-        </ul>
-        <p>
-            Luego del tercer modo pasa al primero de vuelta.
-        </p>
+        <details>
+            <summary>
+                <h3>Tabla visualización <span class="icon-table"></span> <span class="icon-table2"></span> <span class="icon-newspaper"></span></h3>
+            </summary>
+            <ul>
+                <li>
+                   <strong>Primer modo:</strong> Tabla clásica.
+                </li>
+                <li>
+                    <strong>Segundo modo:</strong> Tabla con filas separadas.
+                </li>
+                <li>
+                    <strong>Tercer modo:</strong> Tabla simplificada por datos críticos en tarjetas.
+                </li>
+            </ul>
+            <p>
+                Luego del tercer modo pasa al primero de vuelta.
+            </p>
+        </details>
+        
+        <details>
+            <summary>
+                <h3>Invitados <span class="icon-address-book"></span></h3>
+            </summary>
+            <p>
+                Al presionar el botón Invitados se realiza un ingreso limitado a la aplicación, no se pueden realizar cambios críticos.
+            </p>
+            <p>
+                Los respaldos están inhabilitados. Aunque se puede descargar el estado actual de los stocks de muestra y los archivos originales, como guía de formato .csv a la hora de añadir stocks.
+            </p>
+        </details>
 
-        <h3>Invitados <span class="icon-address-book"></span></h3>
-        <p>
-            Al presionar el botón Invitados se realiza un ingreso limitado a la aplicación, no se pueden realizar cambios críticos.
-        </p>
-        <p>
-            Los respaldos están inhabilitados. Aunque se puede descargar el estado actual de los stocks de muestra y los archivos originales, como guía de formato .csv a la hora de añadir stocks.
-        </p>
+        <details>
+            <summary>
+                <h3>Registro-Captcha <span class="icon-user"></span></h3>
+            </summary>
+            <p>
+                El registro pide completar un captcha de 6 caracteres deformados, entre mayúsculas, minúsculas y números.
+            </p>
+            <p>
+                Mi recomendación es actualizar el captcha dado <span class="icon-loop2"></span> hasta tener uno legible. 
+            </p>
+            <p>
+                Tiene tres intentos antes de que se actualice automáticamente. 
+            </p>
+            <p>
+                Pruebe cambiar mayúsculas por minúsculas y viceversa, no use de guía los tamaños de las letras para pensar que una es mayúscula o minúscula.
+            </p>
+        </details>
 
-        <h3>Registro-Captcha <span class="icon-user"></span></h3>
-        <p>
-            El registro pide completar un captcha de 6 caracteres deformados, entre mayúsculas, minúsculas y números.
-        </p>
-        <p>
-            Mi recomendación es actualizar el captcha dado <span class="icon-loop2"></span> hasta tener uno legible. 
-        </p>
-        <p>
-            Tiene tres intentos antes de que se actualice automáticamente. 
-        </p>
-        <p>
-            Pruebe cambiar mayúsculas por minúsculas y viceversa, no use de guía los tamaños de las letras para pensar que una es mayúscula o minúscula.
-        </p>
+        <details>
+            <summary>
+                <h3>Añadir Stock <span class="icon-add__stock">+</span></h3>
+            </summary>
+            <p>
+                Es necesario usar una imagen y un archivo CSV de menos de 5MB.
+            </p>
+            <p>
+                Puede ver el formato de archivo, descargando los stocks de muestra en la sesión de Invitados.
+            </p>
+            <p>
+                Se requiere un archivo CSV clásico, separado por comas, la primer fila corresponde al título de las columnas, las columnas básicas son:
+            </p>
+            <ul>
+                <li>
+                    Nombre
+                </li>
+                <li>
+                    Precio
+                </li>
+                <li>
+                    Cantidad
+                </li>
+            </ul>
+            <p>
+                Las columnas editables son:
+            </p>
+            <ul>
+                <li>
+                    Nombre
+                </li>
+                <li>
+                    Precio
+                </li>
+                <li>
+                    Cantidad
+                </li>
+                <li>
+                    Categoría
+                </li>
+            </ul>
+            <p>
+                En caso de error de formato, recargue la página, elimine el stock generado, revise su archivo csv y vuelva a intentarlo..
+            </p>
+            <p>
+                Por ejemplo, la columna de precios no puede contener valores nulos distintos de cero, ni valores no numéricos.
+            </p>
+        </details>
 
-        <h3>Añadir Stock <span class="icon-add__stock">+</span></h3>
-        <p>
-            Es necesario usar una imagen y un archivo CSV de menos de 5MB.
-        </p>
-        <p>
-            Puede ver el formato de archivo, descargando los stocks de muestra en la sesión de Invitados.
-        </p>
-        <p>
-            Se requiere un archivo CSV clásico, separado por comas, la primer fila corresponde al título de las columnas, las columnas básicas son:
-        </p>
-        <ul>
-            <li>
-                Nombre
-            </li>
-            <li>
-                Precio
-            </li>
-            <li>
-                Cantidad
-            </li>
-        </ul>
-        <p>
-            Las columnas editables son:
-        </p>
-        <ul>
-            <li>
-                Nombre
-            </li>
-            <li>
-                Precio
-            </li>
-            <li>
-                Cantidad
-            </li>
-            <li>
-                Categoría
-            </li>
-        </ul>
-        <p>
-            En caso de error de formato, recargue la página, elimine el stock generado, revise su archivo csv y vuelva a intentarlo..
-        </p>
-        <p>
-            Por ejemplo, la columna de precios no puede contener valores nulos distintos de cero, ni valores no numéricos.
-        </p>
+        <details>
+            <summary>
+                <h3>Modos (Inicio)</h3>
+            </summary>
+            <p>
+               <strong>En editar</strong> se puede cambiar el nombre de un stock añadido o su imagen.
+            </p>
+            <p>
+                <strong>En eliminar</strong> se requiere de la contraseña para evitar eliminar stocks por error.
+            </p>
+        </details>
 
-        <h3>Modos (Inicio)</h3>
-        <p>
-           <strong>En editar</strong> se puede cambiar el nombre de un stock añadido o su imagen.
-        </p>
-        <p>
-            <strong>En eliminar</strong> se requiere de la contraseña para evitar eliminar stocks por error.
-        </p>
+        <details>
+            <summary>
+                <h3>Diferencia entre “Descargar original” y “Exportar .csv”</h3>
+            </summary>
+            <p>
+                Al descargar se descarga el archivo original cargado al añadir stock.
+            </p>
+            <p>
+                Al exportar se genera un archivo con los datos del estado actual del stock con sus respectivas ediciones y nuevas columnas generadas por la aplicación Visual Stock.
+            </p>
+        </details>
 
-        <h3>Diferencia entre “Descargar original” y “Exportar .csv”</h3>
-        <p>
-            Al descargar se descarga el archivo original cargado al añadir stock.
-        </p>
-        <p>
-            Al exportar se genera un archivo con los datos del estado actual del stock con sus respectivas ediciones y nuevas columnas generadas por la aplicación Visual Stock.
-        </p>
+        <details>
+            <summary>
+                <h3>Modos-Editar (Stock) <span class="icon-pencil2"></span> <span class="icon-images"></span></h3>
+            </summary>
+            <p>
+                Al entrar en este modo se puede editar los datos críticos resaltados.
+            </p>
+            <p>
+                Si está en la versión móvil, el botón para guardar los cambios tras editar es <span class="icon-pencil2"></span>
+            </p>
+            <p>
+                Para importar imágenes <span class="icon-images"></span> es necesario que pesen menos de 5MB, y tengan el mismo nombre que los productos que le corresponden, pueden subirse en grupo o en un comprimido .zip
+            </p>
+        </details>
 
-        <h3>Modos-Editar (Stock) <span class="icon-pencil2"></span> <span class="icon-images"></span></h3>
-        <p>
-            Al entrar en este modo se puede editar los datos críticos resaltados.
-        </p>
-        <p>
-            Si está en la versión móvil, el botón para guardar los cambios tras editar es <span class="icon-pencil2"></span>
-        </p>
-        <p>
-            Para importar imágenes <span class="icon-images"></span> es necesario que pesen menos de 5MB, y tengan el mismo nombre que los productos que le corresponden, pueden subirse en grupo o en un comprimido .zip
-        </p>
+        <details>
+            <summary>
+                <h3>Modos-Eliminar (Stock) <span class="icon-bin"></span></h3>
+            </summary>
+            <p>
+                Esta eliminación no requiere de contraseña, así que debe manejarse con cuidado.
+            </p>
+            <p>
+                En caso de alguna eliminación indebida, revise el inciso de respaldos.
+            </p>
+        </details>
 
-        <h3>Modos-Eliminar (Stock) <span class="icon-bin"></span></h3>
-        <p>
-            Esta eliminación no requiere de contraseña, así que debe manejarse con cuidado.
-        </p>
-        <p>
-            En caso de alguna eliminación indebida, revise el inciso de respaldos.
-        </p>            
-
-        <h3>Respaldos</h3>
-        <p>
-            Al generar cambios (editar, importar/actualizar imágenes, eliminar), se generan respaldos.
-        </p>
-        <p>
-            Uno por cada conjunto de cambios.
-        </p>
-        <p>
-            Si por ejemplo editaste y luego importaste imágenes, se generaran dos respaldos, uno antiguo para la edición y otro reciente para la importación de imágenes.
-        </p>
-        <p>
-            Al seleccionar un respaldo, el estado previo a la restauración queda almacenado en el respaldo más reciente.
-        </p>
-        <p>
-            Al aplicarse el respaldo, este ya no se encuentra disponible para la selección.
-        </p>
-        <p>
-            Solo se cuentan con tres respaldos, así que al aplicar el cuarto cambio el respaldo más antiguo se eliminara.
-        </p>
-        <p>
-            Tenga en cuenta que al seleccionar un respaldo este no se toma como un cambio (edición, importación de imágenes o eliminación), por lo que si se seleccionó un respaldo por error se puede volver al estado previo, seleccionando el respaldo reciente.
-        </p>
+        <details>
+            <summary>
+                <h3>Respaldos</h3>
+            </summary>
+            <p>
+                Al generar cambios (editar, importar/actualizar imágenes, eliminar), se generan respaldos.
+            </p>
+            <p>
+                Uno por cada conjunto de cambios.
+            </p>
+            <p>
+                Si por ejemplo editaste y luego importaste imágenes, se generaran dos respaldos, uno antiguo para la edición y otro reciente para la importación de imágenes.
+            </p>
+            <p>
+                Al seleccionar un respaldo, el estado previo a la restauración queda almacenado en el respaldo más reciente.
+            </p>
+            <p>
+                Al aplicarse el respaldo, este ya no se encuentra disponible para la selección.
+            </p>
+            <p>
+                Solo se cuentan con tres respaldos, así que al aplicar el cuarto cambio el respaldo más antiguo se eliminara.
+            </p>
+            <p>
+                Tenga en cuenta que al seleccionar un respaldo este no se toma como un cambio (edición, importación de imágenes o eliminación), por lo que si se seleccionó un respaldo por error se puede volver al estado previo, seleccionando el respaldo reciente.
+            </p>
+        </details>
         
     </div>
     {% if not request.user.is_authenticated %}

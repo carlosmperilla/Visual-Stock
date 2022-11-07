@@ -590,7 +590,12 @@ footer > ul > li:hover > label {
     text-align: center;
 }
 
-.modal > .plain_panel > .section__description > h3 {
+.modal.modal__contactMe > .plain_panel > .section__description {
+    overflow-x: auto;
+}
+
+.modal__contactMe > .plain_panel > .section__description h3,
+.modal > .plain_panel > .section__description summary {
     font-size: 3em;
     font-family: sans-serif;
     font-weight: bold;
@@ -599,17 +604,50 @@ footer > ul > li:hover > label {
     text-align: left;
     color: var(--text_color);
     background-color: #ffb4002b;
+    padding-left: .5em;
 }
 
-.modal > .plain_panel > .section__description > h3 span {
+.modal__contactMe > .plain_panel > .section__description h3 {
+    padding-right: 5em;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.modal__contactMe > .plain_panel > .section__description h3:first-child {
+    margin-top: 0;
+}
+
+.modal__contactMe > .plain_panel > .section__description .email--contact,
+.modal__contactMe > .plain_panel > .section__description a {
+    width: fit-content;
+    font-size: 2rem;
+    font-family: monospace;
+    font-weight: bold;
+    margin: 0 auto;
+    word-break: break-all;
+}
+
+.modal__contactMe > .plain_panel > .section__description .email--contact {
+    font-weight: normal;
+    margin-left: 0;
+    margin-top: 30px;
+    font-size: 1.8rem;
+    font-family: cursive;
+}
+
+.modal > .plain_panel > .section__description summary h3 {
+    display: inline;
+}
+
+.modal > .plain_panel > .section__description summary h3 span {
     vertical-align: text-top;
 }
 
-.modal > .plain_panel > .section__description > h3 span.icon-eye {
+.modal > .plain_panel > .section__description summary h3 span.icon-eye {
     vertical-align: bottom;
 }
 
-.modal > .plain_panel > .section__description > h3 span.icon-add__stock {
+.modal > .plain_panel > .section__description summary h3 span.icon-add__stock {
     border: 2px solid var(--text_color);
     border-radius: 50%;
     display: inline-flex;
@@ -620,11 +658,11 @@ footer > ul > li:hover > label {
     font-weight: bold;
 }
 
-.modal__howToUse > .plain_panel > .section__description > ul {
+.modal__howToUse > .plain_panel > .section__description details ul {
     margin-bottom: 18px;
 }
 
-.modal__howToUse > .plain_panel > .section__description > ul > li {
+.modal__howToUse > .plain_panel > .section__description details ul > li {
     font-size: 2rem;
     font-weight: 500;
     font-family: sans-serif, Helvetica, Arial;
@@ -634,15 +672,15 @@ footer > ul > li:hover > label {
     margin-left: 1em;
 }
 
-.modal > .plain_panel > .section__description > p {
+.modal > .plain_panel > .section__description details p {
     margin-bottom: 20px;
 }
 
-.modal > .plain_panel > .section__description > p:last-child {
+.modal > .plain_panel > .section__description details p:last-child {
     margin-bottom: 0;
 }
 
-.modal__howToUse > .plain_panel > .section__description > p:last-child {
+.modal__howToUse > .plain_panel > .section__description details:last-child p:last-child {
     margin-bottom: 50px;
 }
 

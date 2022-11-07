@@ -1,3 +1,0 @@
-* Superusuario:
-	Carlos
-	12345

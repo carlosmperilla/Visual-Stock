@@ -1,3 +1,5 @@
+const contentTable = document.getElementsByClassName("content-table")[0];
+
 let dialogFilter = document.querySelector(".filter--modal");
 let formFilter = dialogFilter.querySelector(".form--filter");
 let checksInput = formFilter.querySelectorAll("input[type='checkbox']");
@@ -180,6 +182,9 @@ function closeDialogFilter(event){
     }
 }
 
+
+
+contentTable.style.paddingTop = "25px";
 dialogFilter.addEventListener('click', closeDialogFilter)
 
 for (let checkInput of checksInput) {

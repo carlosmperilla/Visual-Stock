@@ -232,6 +232,21 @@ main > section > .section__content > .section__description {
     font-size: 2.5rem;
 }
 
+/* HowToUse */
+
+.modal > .plain_panel > .section__description summary {
+    font-size: x-large;
+}
+
+.modal__contactMe > .plain_panel > .section__description h3 {
+    font-size: x-large;
+    padding: 5px;
+}
+
+.modal__howToUse > .plain_panel > .section__description details:last-child p:last-child {
+    margin-bottom: 0;
+}
+
 @media screen and (max-width: 600px) {
     /* Title dialog modal */
     .d--modal > .plain_panel > .section__title {
