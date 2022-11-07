@@ -9,8 +9,10 @@ from django.core.files.base import ContentFile
 from django.contrib import messages
 
 
-
 def process_image_in_zipfile(request, product, image_name, path_tmp_extraction):
+    """
+        Validates if the files of the sent zip file are images and assigns it to its corresponding product.
+    """
     error = f"El archivo {image_name} esta corrupto. Revise su zip y vuelva a intentarlo."
     path_img = path_tmp_extraction.joinpath(image_name)
     try:
@@ -26,6 +28,9 @@ def process_image_in_zipfile(request, product, image_name, path_tmp_extraction):
 
 
 def process_zipfile(request, stock_by_name, zip):
+    """
+        Extract the zip files to a temporary folder and process them.
+    """
     with ZipFile(zip) as customzip:
         images = {"".join(image.split(".")[:-1]):image for image in customzip.namelist()}
         products_to_import_images = stock_by_name.products.filter(name__in=images.keys())

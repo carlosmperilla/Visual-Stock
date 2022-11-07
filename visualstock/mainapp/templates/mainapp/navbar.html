@@ -1,25 +1,42 @@
+<div class="burger-button--content">
+    <button class="icon-menu3"></button>
+</div>
+    
 <nav class="{% if request.user.is_authenticated %}nav__post-login{% endif %}"">
     <ul>
     {% if not is_index %}
-        <li class="li__index">
-            <a href="{% url 'index' %}" tabindex="3"><span class="icon-home3"></span> Inicio</a>
+        <li class="li__index {% if not request.user.is_authenticated %} li__x--large {% endif %}">
+            <a href="{% url 'index' %}" tabindex="3">
+                <span class="icon-home3"></span>
+                <span class="menu--principal-text">
+                    Inicio
+                </span>
+            </a>
         </li>
     {% endif %}
     {% if request.user.is_authenticated %}
         <li class="li__created-stocks" tabindex="3">
-            Stocks Creados
+            <span class="menu--principal-text">
+                Stocks Creados
+            </span>
             <div class="submenu__triangle-draw"></div>
             <ul class="ul__stocks">
                 {% for stock in stocks %}
                     <li class="li__stock">
                         <a tabindex="3" href="{% url 'stock:stock' stock.name %}">{{ stock.name }}</a>
                     </li>
+                {% empty %}
+                    <li class="li__backup">
+                        Sin stocks por el momento
+                    </li>
                 {% endfor %}
             </ul>
         </li>
         {% if is_stock %}
             <li class="li__modes-stocks" tabindex="3">
-                Modos
+                <span class="menu--principal-text">
+                    Modos
+                </span>
                 <div class="submenu__triangle-draw"></div>
                 <ul class="ul__modes">
                     {% if not mode == 1 %}
@@ -40,39 +57,66 @@
                 </ul>
             </li>
             <li class="li__backup-stocks" tabindex="3">
-                Respaldos
+                <span class="menu--principal-text">
+                    Respaldos
+                </span>
                 <div class="submenu__triangle-draw"></div>
                 <ul class="ul__backups">
-                    {% for stock in stocks %}
-                        
-                        {% if stock.backup.first_date %}
-                            <li class="li__backup">
-                                <a tabindex="3" href="{% url 'backup:toggle_backup' stock.name 1 %}">
-                                    <span class="icon-history"></span>&nbsp;{{ stock.backup.first_date}} - [Más antiguo]
-                                </a>
-                            </li>
-                        {% endif %}
-                        {% if stock.backup.second_date %}
-                            <li class="li__backup">
-                                <a tabindex="3" href="{% url 'backup:toggle_backup' stock.name 2 %}">
-                                    <span class="icon-history"></span>&nbsp;{{ stock.backup.second_date }} - [Antiguo]
-                                </a>
-                            </li>
-                        {% endif %}
-                        {% if stock.backup.third_date %}
-                                <li class="li__backup">
-                                    <a tabindex="3" href="{% url 'backup:toggle_backup' stock.name 3 %}">
-                                    <span class="icon-history"></span>&nbsp;{{ stock.backup.third_date}} - [Reciente]
-                                </a>
-                            </li>
-                        {% endif %}
-                    {% endfor %}
+                    {% if not stock.backup.third_date %}
+                        <li class="li__backup">
+                            Sin respaldos por el momento
+                        </li>
+                    {% endif %}
+                    {% if stock.backup.first_date %}
+                        <li class="li__backup">
+                            <a tabindex="3" 
+                            href=
+                            {% if request.user.username == "Invitados" %}
+                                ""
+                            {% else %}
+                                "{% url 'backup:toggle_backup' stock.name 1 %}"
+                            {% endif %}
+                                >
+                                <span class="icon-history"></span>&nbsp;{{ stock.backup.first_date}} - [Más antiguo]
+                            </a>
+                        </li>
+                    {% endif %}
+                    {% if stock.backup.second_date %}
+                        <li class="li__backup">
+                            <a tabindex="3"
+                            href=
+                            {% if request.user.username == "Invitados" %}
+                                ""
+                            {% else %}
+                                "{% url 'backup:toggle_backup' stock.name 2 %}"
+                            {% endif %}
+                                >
+                                <span class="icon-history"></span>&nbsp;{{ stock.backup.second_date }} - [Antiguo]
+                            </a>
+                        </li>
+                    {% endif %}
+                    {% if stock.backup.third_date %}
+                        <li class="li__backup">
+                            <a tabindex="3"
+                                href=
+                                {% if request.user.username == "Invitados" %}
+                                    ""
+                                {% else %}
+                                    "{% url 'backup:toggle_backup' stock.name 3 %}"
+                                {% endif %}
+                                    >
+                                <span class="icon-history"></span>&nbsp;{{ stock.backup.third_date}} - [Reciente]
+                            </a>
+                        </li>
+                    {% endif %}
                 </ul>
             </li>
         {%  endif %}
         {% if is_index %}
             <li class="li__modes-stocks" tabindex="3">
-            Modos
+                <span class="menu--principal-text">
+                    Modos
+                </span>
                 <div class="submenu__triangle-draw"></div>
                 <ul class="ul__modes">
                     {% if not mode == 1 %}
@@ -93,23 +137,35 @@
                 </ul>
             </li>
             <li class="li__backup-stocks" tabindex="3">
-                Descargar Original
+                <span class="menu--principal-text">
+                    Descargar Original
+                </span>                    
                     <div class="submenu__triangle-draw"></div>
                     <ul class="ul__backups">
                         {% for stock in stocks %}
                             <li class="li__backup">
                                 <a tabindex="3" href="{{ stock.principal_file.url }}" download><span class="icon-floppy-disk"></span>&nbsp;{{ stock.name }}</a>
                             </li>
+                        {% empty %}
+                            <li class="li__backup">
+                                Sin stocks por el momento
+                            </li>
                         {% endfor %}
                     </ul>
                 </li>
                 <li class="li__backup-stocks" tabindex="3">
-                Exportar .csv
+                    <span class="menu--principal-text">
+                        Exportar .csv
+                    </span>
                     <div class="submenu__triangle-draw"></div>
                     <ul class="ul__backups">
                         {% for stock in stocks %}
                             <li class="li__backup">
-                                <a tabindex="3" href="{% url 'stock_to_csv' stock.name %}"><span class="icon-download"></span>&nbsp;{{ stock.name }}</a>
+                                <a tabindex="3" href="{% url 'stock_to_csv' stock.name %}" download><span class="icon-download"></span>&nbsp;{{ stock.name }}</a>
+                            </li>
+                        {% empty %}
+                            <li class="li__backup">
+                                Sin stocks por el momento
                             </li>
                         {% endfor %}
                     </ul>
@@ -126,10 +182,10 @@
            </ul>
         </li>
     {% else %}
-        <li>
+        <li class="li__x--large">
             <a href="{% url 'signup' %}" tabindex="3">Registrarse</a>
         </li>
-        <li>
+        <li class="li__x--large">
             <a href="{% url 'login' %}" tabindex="3">Iniciar Sesión</a>
         </li>
     {% endif %}

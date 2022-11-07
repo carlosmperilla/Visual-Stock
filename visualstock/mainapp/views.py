@@ -1,5 +1,4 @@
 import csv
-from turtle import update
 
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
@@ -18,6 +17,9 @@ from django.utils import timezone
 
 # Create your views here.
 def index(request):
+    """
+        Render the index both before logging and after.
+    """
     
     context = {
     'title' : 'Inicio',
@@ -39,14 +41,20 @@ def index(request):
     return render(request, 'mainapp/index.html', context)
 
 @login_required
-def addStock(request):
-    if request.method == 'POST':
+def addStock(request) -> JsonResponse:
+    """
+        Validate and add a stock.
+    """
+    if request.method == 'POST' and request.user.username != "Invitados":
         data = validate_stock(request)
         return JsonResponse(data)
 
 @login_required
 def editStock(request):
-    if request.method == 'POST':
+    """
+        Edit the cover of the stock, either its name or its image.
+    """
+    if request.method == 'POST' and request.user.username != "Invitados":
         edit_stock = EditFaceStock(request.POST, request.FILES)
         if edit_stock.is_valid():
             stock_id = request.POST.get("stock_id")
@@ -74,7 +82,10 @@ def editStock(request):
 
 @login_required
 def deleteStock(request):
-    if request.method == 'POST':
+    """
+        Delete the stock validating it with the user password.
+    """
+    if request.method == 'POST' and request.user.username != "Invitados":
         delete_stock = DeleteStock(request.POST)
         if delete_stock.is_valid():
             password = request.POST.get("password")
@@ -91,7 +102,10 @@ def deleteStock(request):
         return redirect(index_delete_mode)
 
 @login_required
-def stock_to_csv(request, stock_name):
+def stock_to_csv(request, stock_name) -> HttpResponse:
+    """
+        Exports the csv file corresponding to the current state of the stock.
+    """
     stocks = Stock.objects.filter(user__pk=request.user.pk)
     stock_by_name = get_object_or_404(stocks, name=stock_name)
     category = bool(stock_by_name.category_column)*stock_by_name.category_column+(not bool(stock_by_name.category_column))*"Categoria"

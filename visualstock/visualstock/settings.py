@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-eo4-b%lx$7rugj4isgwsy^oh%gfwystlk@+^p7&74k@jug(aso
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -135,3 +135,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #Login URL
 LOGIN_URL='/login/'
+

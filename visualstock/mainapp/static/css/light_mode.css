@@ -46,6 +46,8 @@
     --table-card-quantity: #dc8c30f2;
     --table-card-name: rgba(167, 124, 99, 0.47);
     --table-edit-border: #a53c00;
+    --h3-bg-color: #ffb4002b;
+    --fiter--button_bg: rgb(22 173 153);
   }
 
 ::backdrop {

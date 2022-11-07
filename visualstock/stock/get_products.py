@@ -5,12 +5,18 @@ from products.models import Product
 import csv, codecs
 
 def put_dates(instance, row, data):
+    """
+        Update the dictionary with the dates.
+    """
     if row.get(instance.added_date_column):
         data["added_date"] = row.get(instance.added_date_column)
     if row.get(instance.updated_date_column):
         data["updated_date"] = row.get(instance.updated_date_column)
 
 def put_additional_column(instance, row, data):
+    """
+        Updates the dictionary with the additional columns in a field.
+    """
     additional_column = instance.additional_column
     if additional_column:
         additional_list = []
@@ -19,6 +25,9 @@ def put_additional_column(instance, row, data):
         data["additional"] = ",".join(additional_list)
 
 def get_data(row, instance):
+    """
+        Gets the row information and assigns its corresponding stock.
+    """
     data = {
                 'name' : row.get(instance.name_column, ""),
                 'price' : row.get(instance.price_column, ""),
@@ -33,6 +42,9 @@ def get_data(row, instance):
     return data
 
 def get_and_save_products(instance):
+    """
+        It gets the information of the rows and for each row it generates a product. If they have the correct format.
+    """
     decode_file = codecs.iterdecode(instance.principal_file, 'utf-8')
     reader = csv.DictReader(decode_file)
 

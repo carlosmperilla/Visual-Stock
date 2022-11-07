@@ -8,11 +8,19 @@ from products.models import Product
 
 # Create your views here.
 def toggle_backup(request, stock_name, backup_num):
+    """
+        Activate the selected backup, delete the current products, generate the products backed up.
+
+        The backup file becomes the current one,
+        they are rearranged leaving the third field free and the state prior to the backup is backed up in it.
+
+        The dates are also rearranged and updated.
+    """
     stocks = Stock.objects.filter(user__pk=request.user.pk)
     stock_by_name = get_object_or_404(stocks, name=stock_name)
     backups = stock_by_name.backup
     
-    if request.method == 'GET':
+    if request.method == 'GET' and request.user.username != "Invitados":
         if backup_num == 1:
             current = backups.first
             backups.first = backups.second

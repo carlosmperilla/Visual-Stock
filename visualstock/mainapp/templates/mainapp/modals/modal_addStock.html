@@ -13,7 +13,28 @@
     <div class="section__description">
         <div class="form__addStock-content">
 
-            <form id="form__stock-add" action="{% url 'addStock' %}" method="post" enctype="multipart/form-data">
+
+            {% if request.user.username == "Invitados" %}
+                <form id="form__stock-add">
+                    <div class="form__first_step">
+                        {% for field in stock_step_one %}
+                            <label for="{{ field.auto_id }}">
+                                {{ field.label }}
+                            </label>
+                            {{ field }}
+                            {% if field.field.widget.input_type == 'file' %}
+                                <div class="upload-file__interfaz">
+                                    <label for="{{ field.auto_id }}" class="upload-file__button-load" tabindex="1"><span class="upload-file__button-icon icon-upload"></span class="upload-file__button-text"><span>Subir Archivo</span></label>
+                                    <span class="upload-file__filename"></span>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </form>
+        
+                <button tabindex="1" class="button__model" type="button" onclick="window.alert('Opción inhabilitada para invitados. Registrese para probar.')"><div class="button__color-layer"></div><span class="button__text">Seguir</span><span class="button__hide-icon button__special-arrow"></span></button>
+            {% else %}
+                <form id="form__stock-add" action="{% url 'addStock' %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="form__first_step">
                     {% for field in stock_step_one %}
@@ -43,9 +64,10 @@
                     {% endfor %}
                 </div>
                 <datalist id="columnoptions"></datalist>
-            </form>
+                </form>
         
-            <button tabindex="1" class="button__model" type="button" form="form__stock-add" formenctype="multipart/form-data" onclick="ProcesarDatos()"><div class="button__color-layer"></div><span class="button__text">Seguir</span><span class="button__hide-icon button__special-arrow"></span></button>
+                <button tabindex="1" class="button__model" type="button" form="form__stock-add" formenctype="multipart/form-data" onclick="ProcesarDatos()"><div class="button__color-layer"></div><span class="button__text">Seguir</span><span class="button__hide-icon button__special-arrow"></span></button>
+            {% endif %}
         </div>
     </div>
 </div>

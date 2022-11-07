@@ -29,12 +29,18 @@ class Backup(models.Model):
        return "Respaldo-" + self.stock.name + "-" +str(self.stock.pk)
 
     def fill_current(self):
+        """
+            Generates the json corresponding to the current product status and saves it in its corresponding field.
+        """
         current_state = serializers.serialize('json', self.stock.products.all())
         backup_name = f"Respaldo-{self.stock.name}-{self.stock.pk}.json"
         backup_file = ContentFile(current_state, name=backup_name)
         self.current = backup_file
 
     def remove_residual_files(self, old_backup):
+        """
+            Delete the oldest and most unusable backup files.
+        """
         if old_backup != "NULL":
             old_backup_list = json.loads(old_backup.read().decode('utf-8', errors='ignore'))
             last_backup_list = json.loads(self.first.read().decode('utf-8', errors='ignore'))
@@ -48,6 +54,16 @@ class Backup(models.Model):
             delete_general_file_and_folder(old_backup)
 
     def rotate_backup(self):
+        """
+            Rotate the backs. 
+            The first is stored to delete. 
+            The second to the first. 
+            The third to the second. 
+            The current state to the third. 
+            The current state is stored, 
+            residual files from the oldest backup are deleted. 
+            And the dates are updated.
+        """
         old_backup = self.first
 
         self.first = self.second
@@ -62,15 +78,23 @@ class Backup(models.Model):
         self.save()
 
     def clean_backup_files(self):
+        """
+            Delete the backups and the files corresponding to the backups.
+        """
         backups = [self.current, self.first, self.second, self.third]
     
         img_residual = set()
         for backup in backups:
-            backup_list = json.loads(backup.read().decode('utf-8', errors='ignore'))
-            backup_imgs = {product['fields']['image'] for product in backup_list if product['fields']['image'] != ""}
-            img_residual.update(backup_imgs)
-            delete_general_file_and_folder(backup)
-            backup.close()
+            if backup == "NULL":
+                continue
+            try:
+                backup_list = json.loads(backup.read().decode('utf-8', errors='ignore'))
+                backup_imgs = {product['fields']['image'] for product in backup_list if product['fields']['image'] != ""}
+                img_residual.update(backup_imgs)
+                delete_general_file_and_folder(backup)
+                backup.close()
+            except FileNotFoundError:
+                pass
         
         for path_image in img_residual:
             delete_general_file_and_folder(path_image, path=True)

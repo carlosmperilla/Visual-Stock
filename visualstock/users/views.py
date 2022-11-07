@@ -11,7 +11,11 @@ from .captcha_img_tag import generate_captcha
 from .forms import LoginForm, SignUpForm
 
 
-def renew_captcha(request):
+def renew_captcha(request) -> JsonResponse:
+    """
+        Refreshes the captcha value in the session and its error count.
+        It also returns the image in base64.
+    """
 
     if request.user.is_authenticated:
         return redirect('index')
@@ -24,7 +28,12 @@ def renew_captcha(request):
         
         return JsonResponse({'captcha_img': captcha_dict['b64_data']})
 
-def review_captcha(request):
+def review_captcha(request) -> JsonResponse:
+    """
+        Check the value of the captcha sent compared to the one saved in the session. 
+        Return 'success' if they match. 
+        Otherwise, return 'error', renew the captcha in session and send the corresponding base 64 image.
+    """
 
     data = {}
 
@@ -50,10 +59,14 @@ def review_captcha(request):
             request.session['captcha'] = captcha_dict['value']
             data['captcha_img'] = captcha_dict['b64_data']
 
+
         return JsonResponse(data)
 
 # Create your views here.
 def singup_user(request):
+    """
+        Validate and register the user.
+    """
 
     if request.user.is_authenticated:
         return redirect('index')
@@ -106,6 +119,9 @@ def singup_user(request):
     return render(request, "users/signup.html", context)
 
 def login_user(request):
+    """
+        Validate and loggin the user.
+    """
 
     if request.user.is_authenticated:
         return redirect('index')
@@ -143,6 +159,9 @@ def login_user(request):
 
 @login_required
 def logout_user(request):
+    """
+        Logout user session.
+    """
 
     logout(request)
     info_message_text = """

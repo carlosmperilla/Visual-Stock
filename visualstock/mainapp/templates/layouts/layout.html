@@ -8,9 +8,11 @@
     <title>
         {% block title %}{% endblock title %} | Visual Stock
     </title>
-    <link rel="stylesheet" id="theme">
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-    <link rel="stylesheet" href="{% static 'css/icons.css' %}">
+    <link rel="stylesheet" id="theme" rel="preload" as="style">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" rel="preload" as="style">
+    <link rel="stylesheet" href="{% static 'css/tablet_styles.css' %}" media="screen and (max-width:800px)">
+    <link rel="stylesheet" href="{% static 'css/movil_styles.css' %}" media="screen and (max-width:650px)">
+    <link rel="stylesheet" href="{% static 'css/icons.css' %}" rel="preload" as="style">
 </head>
 <body>
     <input type="checkbox" id="display_nav">
@@ -76,10 +78,11 @@
     const dark_theme = "{% static '/css/dark_mode.css' %}";
     const light_theme = "{% static '/css/light_mode.css' %}";
 </script>
-<script src="{% static '/js/interactive-icons.js' %}"></script>
-<script src="{% static '/js/initialAccesibility.js' %}"></script>
+<script src="{% static '/js/interactive-icons.js' %}" rel="preload" as="script" async></script>
+<script src="{% static '/js/initialAccesibility.js' %}" rel="preload" as="script" async></script>
+<script src="{% static '/js/mobileInteraction.js' %}" rel="preload" as="script" async></script>
 {% if request.user.is_authenticated %}
-    <script src="{% static '/js/interactiveSubmenus.js' %}"></script>
+    <script src="{% static '/js/interactiveSubmenus.js' %}" rel="preload" as="script" async></script>
 {% endif %}
 {% block scripts %}{% endblock scripts %}
 </html> 

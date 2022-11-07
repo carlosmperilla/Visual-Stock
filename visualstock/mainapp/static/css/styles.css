@@ -42,10 +42,13 @@ header {
     width: 100vw;
     max-width: 100%;
     height: 60px;
-    padding-left: 20px;
 	padding-right: 20px;
 	gap: 20px;
     position: relative;
+}
+
+header .burger-button--content {
+    display: none;
 }
 
 header > .bg_navbar {
@@ -149,6 +152,7 @@ nav {
     padding: 0px;
     width: 100%;
     height: 100%;
+    margin-left: 10px;
 }
 
 nav > ul {
@@ -518,7 +522,7 @@ footer > time {
 footer > ul {
     display: flex;
     align-items: center;
-    justify-content: end;
+    justify-content: flex-start;
     height: 100%;
     width: 100%;
 }
@@ -542,7 +546,7 @@ footer > ul > li:hover > label {
 }
 
 .modal {
-    height: 100%;
+    height: 100vh;
     width: 100%;
     background-color: var(--modal_bg_color);
     backdrop-filter: brightness(var(--bright_modal)) blur(var(--modal_blur_weight));
@@ -583,14 +587,63 @@ footer > ul > li:hover > label {
     font-family: sans-serif;
     font-weight: bold;
     margin-bottom: 18px;
+    text-align: center;
+}
+
+.modal > .plain_panel > .section__description > h3 {
+    font-size: 3em;
+    font-family: sans-serif;
+    font-weight: bold;
+    margin-bottom: 18px;
+    margin-top: 20px;
+    text-align: left;
+    color: var(--text_color);
+    background-color: #ffb4002b;
+}
+
+.modal > .plain_panel > .section__description > h3 span {
+    vertical-align: text-top;
+}
+
+.modal > .plain_panel > .section__description > h3 span.icon-eye {
+    vertical-align: bottom;
+}
+
+.modal > .plain_panel > .section__description > h3 span.icon-add__stock {
+    border: 2px solid var(--text_color);
+    border-radius: 50%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: flex-end;
+    width: 1em;
+    height: 1em;
+    font-weight: bold;
+}
+
+.modal__howToUse > .plain_panel > .section__description > ul {
+    margin-bottom: 18px;
+}
+
+.modal__howToUse > .plain_panel > .section__description > ul > li {
+    font-size: 2rem;
+    font-weight: 500;
+    font-family: sans-serif, Helvetica, Arial;
+    color: var(--text_color);
+    text-align: justify;
+    list-style-type: disc;
+    margin-left: 1em;
 }
 
 .modal > .plain_panel > .section__description > p {
-    margin-bottom: 9px;
+    margin-bottom: 20px;
 }
 
 .modal > .plain_panel > .section__description > p:last-child {
     margin-bottom: 0;
+}
+
+.modal__howToUse > .plain_panel > .section__description > p:last-child {
+    margin-bottom: 50px;
 }
 
 .modal > .plain_panel > .section__description {
@@ -752,7 +805,7 @@ footer > ul > li:hover > label {
     font-weight: bolder;
     position: absolute;
     right: 1%;
-    bottom: 23%;
+    bottom: calc(50% - 15px);
     border-radius: 50%;
     width: 30px;
     height: 30px;
@@ -1145,7 +1198,6 @@ footer > ul > li:hover > label {
 }
 
 #form__stock-add label {
-    align-self: end;
     font-family: sans-serif, Arial, Helvetica;
     font-weight: bold;
     font-size: 2.6rem;
@@ -1159,6 +1211,7 @@ footer > ul > li:hover > label {
     padding-left: 20px;
     width: 60%;
     height: 4rem;
+    min-height: 4rem;
     outline: none;
     border: none;
     font-weight: normal;
@@ -1357,6 +1410,7 @@ footer > ul > li:hover > label {
     flex-direction: column;
     align-items: start;
     justify-content: space-between;
+    gap: 6%;
 }
 
 .collapse {
@@ -1491,8 +1545,8 @@ footer > ul > li:hover > label {
     background: var(--select_file_bg);
     padding: 1.4rem;
     position: absolute;
-    bottom: 15px;
-    left: 20px;
+    bottom: 5px;
+    left: 10px;
     user-select: none;
     transition: color 1s ease-in-out, 
                 border-color 1s ease-in-out, 
@@ -1757,6 +1811,7 @@ table td[contenteditable]:focus {
      grid-template-rows: 60% 20% 1fr;
      border-radius: 20px;
      contain: content;
+     max-width: 300px;
  }
  
 #tableCards:checked ~ #content table tr td {
@@ -1900,6 +1955,7 @@ table td[contenteditable]:focus {
 }
 
 /* Botone eliminar items stock */
+.filter--button,
 .delete--button {
     position: absolute;
     top: -17px;
@@ -1909,7 +1965,6 @@ table td[contenteditable]:focus {
     justify-content: center;
     align-items: center;
     z-index: 1;
-    border: 1px solid var(--delete_endButton_bg);
     height: 35px;
     background-color: var(--delete_endButton_bg);
     color: var(--delete_endButton_color);
@@ -1922,10 +1977,20 @@ table td[contenteditable]:focus {
     user-select: none;
 }
 
+.filter--button {
+    background-color: var(--fiter--button_bg);
+}
+
+.filter--button span {
+    vertical-align: text-top;
+}
+
+.filter--button:hover,
 .delete--button:hover {
     filter: brightness(var(--bright_button));
 }
 
+.filter--button:active,
 .delete--button:active {
     transform: scale(0.9);
 }
@@ -1957,6 +2022,10 @@ table td[contenteditable]:focus {
     opacity: 1;
     border: 6px solid var(--select_file_bg);
 }
+
+.dialog--modal span {
+    margin-bottom: 10px; 
+ }
 
 .dialog--modal button {
     margin-top: 5px;
@@ -2036,6 +2105,8 @@ table td[contenteditable]:focus {
     font-family: sans-serif;
     font-weight: bold;
     margin-bottom: 18px;
+    margin-top: 25px;
+    text-align: center;
 }
 
 .d--modal > .plain_panel > .section__description > p {
@@ -2224,7 +2295,7 @@ table td[contenteditable]:focus {
     color: var(--button_signup_color_layer);
 }
 
-.d--modal .close__dialog {
+.d--modal .plain_panel > .close__dialog {
     position: absolute;
     right: 10px;
     top: 10px;
@@ -2238,4 +2309,140 @@ table td[contenteditable]:focus {
 .d--modal .captcha--box__input input:focus {
     border: 3px #3e70a0 solid;
     outline: 3px #3e70a0 solid;
+}
+
+
+.auxiliar--icon {
+    display: none;
+}
+
+
+@media screen and (max-width: 1170px) {
+    /* HEADER */
+    nav > ul {
+        font-size: x-large;
+    }
+    
+    nav > ul > li {
+        justify-content: center;
+        align-items: center;
+        white-space: nowrap;
+        margin-left: 1%;
+    }
+
+    /* Add Stock */
+    .modal__addStock > .plain_panel > .section__title {
+        display: none;
+    }
+
+    .modal__addStock > .plain_panel {
+        flex-direction: column;
+    }
+
+    .form__addStock-content {
+        min-height: 330px;
+    }
+
+    .form__addStock-content .button__model {
+        min-width: 100px;
+        min-height: 100px;
+        height: 100px;
+        width: 100px;
+        font-size: x-large;
+    }
+
+    #form__stock-add {
+        overflow: auto;
+    }
+
+    #form__stock-add .upload-file__interfaz {
+        grid-template-columns: 1fr 4fr;
+    }
+
+    #form__stock-add .upload-file__interfaz .upload-file__button-load span:first-child {
+        font-size: x-large;
+    }
+
+    #form__stock-add .upload-file__interfaz .upload-file__button-load span:last-child {
+        display: none;
+    }
+} 
+
+@media screen and (max-width: 1030px) {
+    /* HEADER */
+    nav > ul {
+        font-size: large;
+    }
+
+    nav > ul > .li__x--large {
+        font-size: x-large;
+    }
+
+    /* Add Stock */
+    .form__addStock-content .button__model {
+        min-width: 75px;
+        min-height: 75px;
+        height: 75px;
+        width: 75px;
+        font-size: large;
+    }
+
+    .form__addStock-content .button__model > .button__special-arrow::after {
+        font-size: 4.3rem;
+    }
+
+    .form__addStock-content .button__optional-columns {
+        bottom: auto;
+        left: auto;
+        top: 35px;
+        right: 5px;
+        z-index: 2;
+    }
+}
+
+
+@media screen and (max-width: 910px) {
+    /* MAIN */
+    main > section {
+        overflow: auto;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    main > section > .section__title {
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    main > section > .section__content {
+        grid-template-columns: 4fr 1fr;
+        padding-top: 0;
+        padding-left: 0;
+    }
+
+    main > section > .section__content > .section__description {
+        margin-bottom: 50px;
+    }
+
+    main > .section__login,
+    main > .section__signup {
+        gap: 0;
+    }
+
+    main > .section__login > .section__content,
+    main > .section__signup > .section__content {
+        grid-template-columns: 1fr;
+        width: 100%;
+    }
+    main > .section__login > .section__content > .section__description,
+    main > .section__signup > .section__content > .section__description {
+        margin-bottom: 0;
+    }
+
+    /* Add Stock */
+    .form__addStock-content .button__model {
+        bottom: 0;
+        right: 0;
+    }
+    
 }

@@ -7,12 +7,18 @@ from stock.models import Stock
 from stock.forms import AddStockStepOne, AddStockStepTwo, AddStockOptional
 
 
-def read_column_names(principal_file):
+def read_column_names(principal_file) -> list:
+    """
+        Read the column names.
+    """
     column_names = principal_file.readline().decode('utf-8').strip().split(',')
     principal_file.seek(0)
     return column_names
 
-def inconsistent_columns(request, fields, data):
+def inconsistent_columns(request, fields, data) -> dict:
+    """
+       Check that invalid or repeated column names are not used. 
+    """
     errors = {}
     aux_column_names = data["column_names"].copy()
     for field in fields:
@@ -26,13 +32,21 @@ def inconsistent_columns(request, fields, data):
                 errors[field.label] = [{'message': 'Las columna escogida ya fue usada. Use otro nombre de columna.'}]
     return errors
 
-def errorsHumanize(stock_step):
+def errorsHumanize(stock_step) -> str:
+    """
+        Replace default error names with assigned ones, to make them more readable.
+    """
     aux_errors = stock_step.errors.as_json().replace('__all__', 'General')
     for field in stock_step:
         aux_errors = aux_errors.replace(str(field.name), str(field.label))
     return aux_errors
 
-def validate_stock_step_two(request, data):
+def validate_stock_step_two(request, data) -> dict:
+    """
+        Finish the validation of the stock, 
+        check that the columns are valid, save the stock, 
+        extract the products and assign the corresponding backup.
+    """
     if request.POST.get('second_step'):
         stock_step_two = AddStockStepTwo(request.POST)
         stock_optional = AddStockOptional(request.POST)
@@ -69,7 +83,10 @@ def validate_stock_step_two(request, data):
 
         return data
 
-def validate_stock(request):
+def validate_stock(request) -> dict:
+    """
+        Validates the first and second step of the stock addition, and if so, returns the accumulated errors.
+    """
     data = {}
     stock_step_one = AddStockStepOne(request.POST, request.FILES)
     if stock_step_one.is_valid():

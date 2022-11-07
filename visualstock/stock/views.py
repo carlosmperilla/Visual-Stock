@@ -11,8 +11,12 @@ from django.contrib import messages
 
 from .importProductImages_implement import process_zipfile
 
+
 # Create your views here.
 def stock(request, stock_name):
+    """
+        Render the stock in template.
+    """
     stocks = Stock.objects.filter(user__pk=request.user.pk)
     stock_by_name = get_object_or_404(stocks, name=stock_name)
     products_by_stock = stock_by_name.products.all()
@@ -34,11 +38,14 @@ def stock(request, stock_name):
     return render(request, "stock/stock.html", context)
 
 @login_required
-def editProducts(request, stock_name):
+def editProducts(request, stock_name) -> JsonResponse:
+    """
+        Validate and edit stock products.
+    """
     stocks = Stock.objects.filter(user__pk=request.user.pk)
     stock_by_name = get_object_or_404(stocks, name=stock_name)
 
-    if request.method == 'POST':
+    if request.method == 'POST' and request.user.username != "Invitados":
         edited_rows = json.loads(request.body)
 
         for edited_row in edited_rows:
@@ -74,10 +81,13 @@ def editProducts(request, stock_name):
 
 @login_required
 def importProductImages(request, stock_name):
+    """
+        Validate and import or update stock products. Process zip files and send multiple images.
+    """
     stocks = Stock.objects.filter(user__pk=request.user.pk)
     stock_by_name = get_object_or_404(stocks, name=stock_name)
 
-    if request.method == 'POST':
+    if request.method == 'POST' and request.user.username != "Invitados":
         form_import_images = ImportImages(request.POST, request.FILES)
         if form_import_images.is_valid():
             images = {"".join(image.name.split(".")[:-1]):image for image in request.FILES.getlist('images')}
@@ -101,10 +111,13 @@ def importProductImages(request, stock_name):
 
 @login_required
 def deleteProducts(request, stock_name):
+    """
+        Validate and delete stock products.
+    """
     stocks = Stock.objects.filter(user__pk=request.user.pk)
     stock_by_name = get_object_or_404(stocks, name=stock_name)
 
-    if request.method == 'POST':
+    if request.method == 'POST' and request.user.username != "Invitados":
         ids_to_remove = json.loads(request.body)
         products_to_remove = stock_by_name.products.filter(pk__in=ids_to_remove)
         try:

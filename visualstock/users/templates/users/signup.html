@@ -60,5 +60,5 @@
 {% block scripts %}
     <script>const url_renew_captcha = "{% url 'renew_captcha' %}";</script>
     <script>const url_review_captcha = "{% url 'review_captcha' %}";</script>
-    <script src="{% static '/js/captchaUse.js' %}"></script>
+    <script src="{% static '/js/captchaUse.js' %}" async></script>
 {% endblock scripts %}

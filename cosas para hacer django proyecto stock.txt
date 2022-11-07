@@ -96,14 +96,41 @@ Modificar el admin:
 -----------------------------------------------------------------------------------------------------------------------------------
 ***Captcha autogenerado para el registro.(probar la lectura del captcha con inteligencias artificiales para hacerlo lo suficientemente robusto y claro).[HECHO]
 ***Adaptación a responsive.
-***boton flotante de filtros (es sencillo y en javascript, pero requiere manejo distinto en cursor y en movil, lo de cursor no funciona en celular y lo de movil probablemente no funcione en pc)
 ***Completar el como usar, contacto y el modo de invitado.
+***Comentar funciones y configurar admin para los modelos.
+***boton flotante de filtros (es sencillo y en javascript, pero requiere manejo distinto en cursor y en movil, lo de cursor no funciona en celular y lo de movil probablemente no funcione en pc)
 -------------------------------------------------------------------------------------------------------------------------------
 *modificar el captcha generador, crear uno temporal, ver si se puede mostrar imagen temporal, usar para pasar dato, crear imagen y renderizar. Luego se valida.
 *se usa base64, temporatry file y .seek(0)[HECHO]
 -------------------------------------------------------------------------------------------------------------------------------
-***Adaptación a responsive.
-*Primera parte: [barra de navegación-superior]
+***Adaptación a responsive.[HECHO]
+**Modo tableta.[Hecho.]
+**Modo movil.[HECHO]
+
+*****Arreglar width de navbar-desplegable (movil)[HECHO]
+********evitar el click por defecto revisar (respaldos)[HECHO, más complejo de lo que parecia]
+
+*****Arreglar tamaño tarjetas de tabla[HECHO]
+-------------------------------------------------------------------------------------------------------------------------------
+***Completar el como usar, contacto y el modo de invitado.[CASI]
+***Comentar funciones y configurar admin para los modelos.[HECHO]
+***boton flotante de filtros (es sencillo y en javascript, pero requiere manejo distinto en cursor y en movil, lo de cursor no funciona en celular y lo de movil probablemente no funcione en pc)
+******Arreglar carga de cache de archivos importantes.
+*********crea pagina de 404 y probar
+---------------------------
+**Modo invitado.[HECHO]
+Usuario: Invitados
+Contraseña: contraseña_invitados
+**** Completar como usar [hecho]
+*Falta poner el how to use del filtro en caso de hacerlo.[VER]
+***Comentar funciones y configurar admin para los modelos.[HECHO]
+--------------------------------------------------------------------------------------------------------------
+*********crea pagina de 404 y probar[HECHO]
+******Arreglar carga de cache de archivos importantes.[Se resuelve por servidor así que irrelevante]
+-----------------------------------------------------------------------------------------------------------------------------
+***boton flotante de filtros (es sencillo y en javascript, pero requiere manejo distinto en cursor y en movil, lo de cursor no funciona en celular y lo de movil probablemente no funcione en pc)
+*****Completar el contacto.[Al final]
+
 
 
 

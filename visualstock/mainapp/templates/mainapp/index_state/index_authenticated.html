@@ -15,7 +15,7 @@
                 {% endif %}
                 
                 <a href="{% url 'stock:stock' stock.name %}" class="stock-card__name" tabindex="1">{{ stock.name }}</a>
-                <img title="{{ stock.image.name }}" class="stock-card__image" src="{{ stock.image.url }}" alt="{{ stock.image.name }}" loading="lazy">
+                <img width="400px" title="{{ stock.image.name }}" class="stock-card__image" src="{{ stock.image.url }}" alt="{{ stock.image.name }}" loading="lazy">
             </article>
         {% endfor %}
     </section>

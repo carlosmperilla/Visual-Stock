@@ -24,7 +24,9 @@ function showOrHideSubMenu(element){
 }
 
 function enterToAction(element, action){
-    element.addEventListener("keydown", (event) => { if( event.key === "Enter" ){ action(element) } })
+    element.addEventListener("keydown", (event) => { 
+        if( event.key === "Enter" ){ action(element) } 
+    })
 }
 
 function hideSubmenuAll(){
@@ -51,6 +53,5 @@ for (let item of navBackupStocks){
 body.addEventListener("click", (event) => {
     hideSubmenuAll()
 }, false)
-
 
 escapeToAction(body, hideSubmenuAll)

@@ -42,13 +42,22 @@ class Stock(models.Model):
     def __str__(self):
         return self.name + '-' + str(self.pk)
 
-    def additional_column_as_list(self):
+    def additional_column_as_list(self) -> list:
+        """
+            Splits the string of additional columns and returns their list.
+        """
         return self.additional_column.split(',')
 
     def extract_products(self):
+        """
+            Generates the products from the principal file and saves them.
+        """
         get_and_save_products(self)
 
     def set_current_backup(self):
+        """
+            Set backup based on the current state of the stock and its products.
+        """
         backup = Backup(stock = self)
         backup.fill_current()
         backup.save()

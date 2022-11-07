@@ -7,17 +7,49 @@
 
 {% block content %}
 
+    {% if mode == 0 %}
+        <button onclick="window.alert('hola')" class="filter--button" title="Filtrar productos" tabindex="1">
+            <span class="icon-mug"></span>&nbsp;Filtrar productos
+        </button>
+    {% endif %}
+
+
     {% if mode == 1 %}
-        <div class="edit-button_box">
-            <button onclick="showDialogImportImages()" class="import-img--button" title="Importar/Actualizar imagenes" tabindex="1">Importar/Actualizar imagenes</button>
-            <button onclick="saveItems()" class="edit--button" title="Guardar edición" tabindex="1">Guardar cambios</button>
-        </div>
+        {% if request.user.username == "Invitados" %}
+            <div class="edit-button_box">
+                <button onclick="window.alert('Opción inhabilitada para invitados. Registrese para probar.')" class="import-img--button" title="Importar/Actualizar imagenes" tabindex="1">
+                    <span class="principal--text">Importar/Actualizar imagenes</span>
+                    <span class="auxiliar--icon icon-images"></span>
+                </button>
+                <button onclick="window.alert('Opción inhabilitada para invitados. Registrese para probar.')" class="edit--button" title="Guardar edición" tabindex="1">
+                    <span class="principal--text">Guardar cambios</span>
+                    <span class="auxiliar--icon icon-pencil2"></span>
+                </button>
+            </div>
+        {% else %}
+            <div class="edit-button_box">
+                <button onclick="showDialogImportImages()" class="import-img--button" title="Importar/Actualizar imagenes" tabindex="1">
+                    <span class="principal--text">Importar/Actualizar imagenes</span>
+                    <span class="auxiliar--icon icon-images"></span>
+                </button>
+                <button onclick="saveItems()" class="edit--button" title="Guardar edición" tabindex="1">
+                    <span class="principal--text">Guardar cambios</span>
+                    <span class="auxiliar--icon icon-pencil2"></span>
+                </button>
+            </div>
+        {% endif %}
     {% endif %}
 
     {% if mode == 2 %}
-        <button onclick="deleteItems()" class="delete--button" title="Guardar edición" tabindex="1">
-            Eliminar&nbsp;<span class="delete--counter">0</span>&nbsp;productos
-        </button>
+        {% if request.user.username == "Invitados" %}
+            <button onclick="window.alert('Opción inhabilitada para invitados. Registrese para probar.')" class="delete--button" title="Guardar edición" tabindex="1">
+                Eliminar&nbsp;<span class="delete--counter">0</span>&nbsp;productos
+            </button>
+        {% else %}
+            <button onclick="deleteItems()" class="delete--button" title="Guardar edición" tabindex="1">
+                Eliminar&nbsp;<span class="delete--counter">0</span>&nbsp;productos
+            </button>
+        {% endif %}
     {% endif %}
 
     <div class="content-table">
@@ -59,7 +91,7 @@
                         {% endif %}
                         <td class="product--img">
                             {% if product.image %}
-                                <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                                <img width="400px" src="{{ product.image.url }}" alt="{{ product.name }}">
                             {% endif %}
                         </td>
                         <td class="product--name" {% if mode == 1 %}contenteditable{% endif %}>{{ product.name }}</td>
@@ -84,34 +116,50 @@
         </table>
     </div>
 
-
-    <dialog class="d--modal">
-        <section class="plain_panel">
-            <h2 class="section__title">Importar/Actualizar Imagenes</h2>
-            <section class="section__description" tabindex="1">
-                <p>Para importar o actualizar imagenes, sus imagenes deben tener <strong>el mismo nombre que el producto.</strong></p>
-                <p>Se dispone de dos opciones, cargar un archivo zip con las imagenes ó cargar las imagenes directamente.</p>
-                <p>Las imagenes con nombres incorrectos seran ignoradas.</p>
-                <div class="button--container">
-                    <button onclick="uploadZip()" class="upload__import">
-                        <span class='icon-file-zip'></span>
-                        &nbsp;Importar Zip
-                    </button>
-                    <button onclick="uploadImages()" class="upload__import">
-                        <span class='icon-images'></span>
-                        &nbsp;Importar Imagenes
-                    </button>
-                    <button class="close__dialog">Cerrar</button>
-                </div>
+    {% if request.user.username != "Invitados" %}
+        <dialog class="d--modal">
+            <section class="plain_panel">
+                <h2 class="section__title">Importar/Actualizar Imagenes</h2>
+                <section class="section__description" tabindex="1">
+                    <p>Para importar o actualizar imagenes, sus imagenes deben tener <strong>el mismo nombre que el producto.</strong></p>
+                    <p>Se dispone de dos opciones, cargar un archivo zip con las imagenes ó cargar las imagenes directamente.</p>
+                    <p>Las imagenes con nombres incorrectos seran ignoradas.</p>
+                    <div class="button--container">
+                        <button onclick="uploadZip()" class="upload__import">
+                            <span class='icon-file-zip'></span>
+                            &nbsp;Importar Zip
+                        </button>
+                        <button onclick="uploadImages()" class="upload__import">
+                            <span class='icon-images'></span>
+                            &nbsp;Importar Imagenes
+                        </button>
+                        <button class="close__dialog">Cerrar</button>
+                    </div>
+                </section>
             </section>
-        </section>
-        <form id="form--import_images" action="{% url 'stock:importProductImages' stock.name %}" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            {% for field in form_import_images %}
-                {{ field }}
-            {% endfor %}
-        </form>
-    </dialog>
+            <form id="form--import_images" action="{% url 'stock:importProductImages' stock.name %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% for field in form_import_images %}
+                    {{ field }}
+                {% endfor %}
+            </form>
+        </dialog>
+    {% endif %}
+
+    {% if mode == 0 %}
+        <dialog class="d--modal">
+            <section class="plain_panel">
+                <h2 class="section__title">Filtrar Productos</h2>
+                <section class="section__description" tabindex="1">
+                    <p>Los productos filtrados son solo para visualización.</p>
+                    <p>Al actualizar la pagina se visualizaran todos los productos como es usual.</p>
+                    <div class="button--container">
+                        {% comment %} aqui van cosas {% endcomment %}
+                    </div>
+                </section>
+            </section>
+        </dialog>
+    {% endif %}
 
 {% endblock content %}
 
@@ -119,12 +167,12 @@
     {% if request.user.is_authenticated %}
         {% if mode == 1 %}
             <script>const url_edit_products = "{% url 'stock:editProducts' stock.name %}";</script>
-            <script src="{% static 'js/editTableStock.js' %}"></script>
-            <script src="{% static 'js/importImages.js' %}"></script>
+            <script src="{% static 'js/editTableStock.js' %}" async></script>
+            <script src="{% static 'js/importImages.js' %}" async></script>
         {% endif %}
         {% if mode == 2 %}
             <script>const url_delete_products = "{% url 'stock:deleteProducts' stock.name %}";</script>
-            <script src="{% static 'js/deleteItemTableStock.js' %}"></script>
+            <script src="{% static 'js/deleteItemTableStock.js' %}" async></script>
         {% endif %}
     {% endif %}
 {% endblock scripts %}
