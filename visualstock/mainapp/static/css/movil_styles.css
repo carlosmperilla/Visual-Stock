@@ -217,6 +217,21 @@ main > section > .section__content > .section__description {
     font-size: medium;
 }
 
+/* Form Filter */
+.form--filter {
+    padding-right: 50px;
+}
+
+.form--filter fieldset input[type="checkbox"] {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.d--modal.filter--modal > .plain_panel > .section__description #filter_end--button {
+    margin-top: 15px;
+    font-size: 2.5rem;
+}
+
 @media screen and (max-width: 600px) {
     /* Title dialog modal */
     .d--modal > .plain_panel > .section__title {

@@ -8,7 +8,7 @@
 {% block content %}
 
     {% if mode == 0 %}
-        <button onclick="window.alert('hola')" class="filter--button" title="Filtrar productos" tabindex="1">
+        <button onclick="document.querySelector('.filter--modal').showModal()" class="filter--button" title="Filtrar productos" tabindex="1">
             <span class="icon-mug"></span>&nbsp;Filtrar productos
         </button>
     {% endif %}
@@ -140,22 +140,63 @@
             <form id="form--import_images" action="{% url 'stock:importProductImages' stock.name %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 {% for field in form_import_images %}
-                    {{ field }}
+                {{ field }}
                 {% endfor %}
             </form>
         </dialog>
-    {% endif %}
-
-    {% if mode == 0 %}
-        <dialog class="d--modal">
+        {% endif %}
+        
+        {% if mode == 0 %}
+        <dialog class="d--modal filter--modal">
             <section class="plain_panel">
+                <button id="filter_close--button" onclick="document.querySelector('.filter--modal').close()">Cerrar</button>
                 <h2 class="section__title">Filtrar Productos</h2>
                 <section class="section__description" tabindex="1">
                     <p>Los productos filtrados son solo para visualización.</p>
                     <p>Al actualizar la pagina se visualizaran todos los productos como es usual.</p>
-                    <div class="button--container">
-                        {% comment %} aqui van cosas {% endcomment %}
-                    </div>
+                    <p>Se pueden usar uno o más filtros.</p>
+                    <form class="form--filter">
+                        <fieldset id="filter--by--name">
+                            <legend>Por Nombre:</legend>
+                            <input type="checkbox" id="apply--name_filter">
+                            <input type="text" list="product__names" name="product__name" id="product__name" disabled>
+                            <datalist id="product__names">
+                            </datalist>
+                        </fieldset>
+
+                        {% if stock.category_column %}
+                            <fieldset id="filter--by--category">
+                                <legend>Por Categoria:</legend>
+                                <input type="checkbox" id="apply--category_filter">
+                                <input type="text" list="product__categories" name="product__category" id="product__category" disabled>
+                                <datalist id="product__categories">
+                                </datalist>
+                            </fieldset>                        
+                        {% endif %}
+
+                        <fieldset id="filter--by--price">
+                            <legend>Por Precio:</legend>
+                            <input type="checkbox" id="apply--price_filter">
+                            <span class="subtitle--fieldset">Min: </span>
+                            <span class="price__range--min_value">Indefinido</span>
+                            <input disabled type="range" name="price__range--min" id="price__range--min" step="0.01">
+                            <span class="subtitle--fieldset">Max: </span>
+                            <span class="price__range--max_value">Indefinido</span>
+                            <input disabled type="range" name="price__range--max" id="price__range--max" step="0.01">
+                        </fieldset>
+
+                        <fieldset id="filter--by--quantity">
+                            <legend>Por Cantidad:</legend>
+                            <input type="checkbox" id="apply--quantity_filter">
+                            <span class="subtitle--fieldset">Min: </span>
+                            <span class="quantity__range--min_value">Indefinido</span>
+                            <input disabled type="range" name="quantity__range--min" id="quantity__range--min" step="1">
+                            <span class="subtitle--fieldset">Max: </span>
+                            <span class="quantity__range--max_value">Indefinido</span>
+                            <input disabled type="range" name="quantity__range--max" id="quantity__range--max" step="1">
+                        </fieldset>
+                    </form>
+                    <button id="filter_end--button" onclick="applyFilter()">Filtrar</button>
                 </section>
             </section>
         </dialog>
@@ -165,6 +206,9 @@
 
 {% block scripts %}
     {% if request.user.is_authenticated %}
+        {% if mode == 0 %}
+            <script src="{% static 'js/filter-interactive.js' %}" async></script>
+        {% endif %}
         {% if mode == 1 %}
             <script>const url_edit_products = "{% url 'stock:editProducts' stock.name %}";</script>
             <script src="{% static 'js/editTableStock.js' %}" async></script>
