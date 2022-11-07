@@ -55,6 +55,11 @@
     --bright_modal: 0.7;
     --modal_blur_weight: 5px;
 }
+
+::selection {
+    --selection--color: yellow;
+    --selection--bg_color: darkgoldenrod;
+}
   
 
 body {

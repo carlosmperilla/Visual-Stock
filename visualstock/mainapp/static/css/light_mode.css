@@ -48,6 +48,8 @@
     --table-edit-border: #a53c00;
     --h3-bg-color: #ffb4002b;
     --fiter--button_bg: rgb(22 173 153);
+    --selection--color: cornsilk;
+    --selection--bg_color: goldenrod;
   }
 
 ::backdrop {
@@ -55,6 +57,12 @@
   --bright_modal: 0.8;
   --modal_blur_weight: 5px;
 }
+
+::selection {
+  --selection--color: cornsilk;
+  --selection--bg_color: goldenrod;
+}
+
 
 body {
     background-image: url("../imgs/background_pattern_light.jpg");

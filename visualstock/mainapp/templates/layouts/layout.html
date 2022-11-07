@@ -8,7 +8,16 @@
     <title>
         {% block title %}{% endblock title %} | Visual Stock
     </title>
+    <meta property="og:title" content="Visual Stock">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="Aplicación web enfocada en la facil visualización de tablas de productos con imagenes.">
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:locale:alternate" content="en_GB" />
+    <meta property="og:locale:alternate" content="es_US" />
+    <link rel="icon" href="{% static 'imgs/favicon.png' %}" type="image/png">
+    <link rel="shortcut icon" href="{% static 'imgs/favicon.png' %}" type="image/png">
     <link rel="stylesheet" id="theme" rel="preload" as="style">
+
     <link rel="stylesheet" href="{% static 'css/styles.css' %}" rel="preload" as="style">
     <link rel="stylesheet" href="{% static 'css/tablet_styles.css' %}" media="screen and (max-width:800px)">
     <link rel="stylesheet" href="{% static 'css/movil_styles.css' %}" media="screen and (max-width:650px)">
