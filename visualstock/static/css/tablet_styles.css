@@ -1,0 +1,110 @@
+/* HEADER */
+nav > ul {
+    font-size: medium;
+}
+
+nav > ul > .li__x--large {
+    font-size: x-large;
+}
+
+/* How To Use Modal */
+/* Button Model */
+.button__model {
+    height: 125px;
+    width: 125px;
+    font-size: 2rem;
+}
+
+/* Error Content */
+.errors-content {
+    width: 80%;
+    height: 80px;
+}
+
+@media screen and (max-width: 770px) {
+    /* How To Use */
+    .modal > .plain_panel {
+        width: 90%;
+    }
+    
+    /* Title dialog modal */
+    .d--modal > .plain_panel > .section__title {
+        font-size: 4rem;
+    }
+
+    /* Add Stock */
+    .form__addStock-content .button__model {
+        border-radius: 25px;
+        height: 3rem;
+        min-height: 3rem;
+    }
+
+    .form__addStock-content .button__model .button__color-layer {
+        border-radius: 25px;
+    }
+
+    .form__addStock-content .button__model > .button__hide-icon {
+        font-size: 2.6rem;
+    }
+}
+
+
+@media screen and (max-width: 700px) {
+    /* How To Use */
+    .modal > .plain_panel {
+        width: 95%;
+    }
+
+    /* HEADER */
+    nav > ul {
+        font-size: small;
+    }
+
+    nav > ul > .li__x--large {
+        font-size: x-large;
+    }
+
+    #display_nav:checked ~ header > nav ul li:last-child {
+        display: none;
+    }
+
+    /* MAIN */
+    main > section > .section__title {
+        font-size: 4rem;
+    }
+
+    input:-webkit-autofill:hover, 
+    .section__login .section__description > form input::placeholder, 
+    .section__login .section__description > form input:not(:focus), 
+    .section__login .section__description > form input:focus, 
+    .section__signup .section__description > form input::placeholder, 
+    .section__signup .section__description > form input:not(:focus), 
+    .section__signup .section__description > form input:focus {
+        font-size: 2rem;
+    }
+
+    .section__login > .section__title,
+    .section__signup > .section__title {
+        display: none;
+    }
+
+    main > .section__login > .section__content,
+    main > .section__signup > .section__content {
+        justify-content: center;
+        min-height: 300px;
+    }
+
+    main > .section__login > .section__content > .section__description,
+    main > .section__signup > .section__content > .section__description {
+        flex-direction: column;
+        height: max-content;
+        justify-content: space-around;
+        align-items: center;
+        padding: 10px;
+    }
+
+    .section__login .section__description > form,
+    .section__signup .section__description > form {
+        width: 100%;
+    }
+}

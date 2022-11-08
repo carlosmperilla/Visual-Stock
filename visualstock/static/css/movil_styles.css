@@ -1,0 +1,470 @@
+a:focus {
+    outline: none;
+}
+
+main {
+    margin-right: 40px;
+}
+
+/* HEADER */
+.ul__backups > .li__backup {
+    white-space: pre-line;
+    width: 55%;
+    margin-bottom: 10px;
+    text-align: left;
+    justify-content: flex-start;
+}
+
+.ul__backups:hover > .li__backup a,
+.ul__backups:active > .li__backup a {
+    justify-content: flex-start;
+    text-align: left;
+    width: fit-content;
+}
+
+.ul__backups:hover > .li__backup a,
+.ul__backups:active > .li__backup a {
+    pointer-events: none;
+}
+
+header {
+    flex-direction: row-reverse;
+}
+
+header nav {
+    display: none;
+}
+
+nav > ul > .li__x--large { 
+    font-size: xxx-large;
+}
+
+header nav.show--nav__menu {
+    display: flex;
+    margin-left: 0px;
+    display: flex;
+    background: var(--plain-panel_bg_color);
+    z-index: 2;
+    position: absolute;
+    top: 60px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    min-height: calc(100vh - 60px);
+    width: 100%;
+}
+
+header nav.show--nav__menu ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    font-size: xx-large;
+    overflow: auto;
+}
+
+header .burger-button--content {
+    order: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-grow: 1;
+}
+
+header .burger-button--content button {
+    background: none;
+    border: none;
+    user-select: none;
+    font-size: 3rem;
+    color: var(--nav_color);
+    padding: 10px;
+    padding-left: 20px;
+    height: 100%;
+}
+
+header .burger-button--content button.show--nav__menu {
+    background: var(--plain-panel_bg_color);
+}
+
+header nav.show--nav__menu > ul > li {
+    flex-wrap: wrap;
+    padding: 0;
+}
+
+
+header nav.show--nav__menu > ul > li:active .menu--principal-text,
+header nav.show--nav__menu > ul > li:hover .menu--principal-text {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    background-color: var(--table_even_row_bg);
+}
+
+nav > ul > .li__x--large:active,
+nav > ul > .li__x--large:hover {
+    background-color: var(--table_even_row_bg);
+}
+
+header nav.show--nav__menu > ul > li.li__index :active .menu--principal-text,
+header nav.show--nav__menu > ul > li.li__index :hover .menu--principal-text {
+    text-align: left;
+}
+
+header nav.show--nav__menu > ul > li:active .submenu__triangle-draw,
+header nav.show--nav__menu > ul > li:hover .submenu__triangle-draw {
+    display: none;
+}
+
+header nav.show--nav__menu > ul > li > ul {
+    display: none;
+    width: 100vw;
+    position: relative;
+    left: auto;
+    right: auto;
+    top: auto;
+    bottom: auto;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+    position: relative;
+    align-items: flex-start;
+    transition: none;
+}
+
+header nav.show--nav__menu > ul > li > ul.ul__user-options {
+    border-radius: 25px;
+}
+
+header nav.show--nav__menu > ul > li > ul > li {
+    justify-content: flex-start;
+    border: none;
+    white-space: nowrap;
+    text-align: left;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    border: none
+}
+
+header nav.show--nav__menu > ul > li:active > ul, 
+header nav.show--nav__menu > ul > li:hover > ul {
+    visibility: visible;
+    opacity: 1;
+    display: flex;
+}
+
+header nav.show--nav__menu > ul > li:active > ul > li, 
+header nav.show--nav__menu > ul > li:hover > ul > li {
+    border: none;
+}
+
+header nav.show--nav__menu > ul > li:focus,
+header nav.show--nav__menu > ul > li > ul:focus {
+    outline: none;
+}
+
+/* Footer */
+footer {
+    grid-template-columns: 70% 30%;
+}
+
+footer > ul > li {
+    white-space: nowrap;
+}
+
+footer > time {
+    font-size: 2.2rem;
+}
+
+/* MAIN */
+main > section > .section__content {
+    display: flex;
+    flex-direction: column;
+}
+
+main > section > .section__content > .section__description {
+    margin-bottom: 20px;
+}
+
+/* How To Use */
+.modal > .plain_panel .modal__close-button {
+    width: 20px;
+    height: 20px;
+    top: -10px;
+    right: -10px;
+}
+
+.modal > .plain_panel .modal__close-button button__text::after,
+.modal > .plain_panel .modal__close-button > .button__hide-icon::after {
+    font-size: 1rem;
+}
+
+/* DIALOG MODAL captcha*/
+.d--modal .captcha--box__input input {
+    min-width: 90px;
+}
+
+.d--modal .captcha--box__input button {
+    font-size: 1.5rem;
+    min-width: 90px;
+}
+
+/* Pop-Up Message */
+.popup_message {
+    font-size: large;
+}
+
+/* BUTTONS TOP MAIN */
+.edit-button_box > button {
+    font-size: medium;
+}
+
+/* Form Filter */
+.form--filter {
+    padding-right: 50px;
+}
+
+.form--filter fieldset input[type="checkbox"] {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.d--modal.filter--modal > .plain_panel > .section__description #filter_end--button {
+    margin-top: 15px;
+    font-size: 2.5rem;
+}
+
+/* HowToUse */
+
+.modal > .plain_panel > .section__description summary {
+    font-size: x-large;
+}
+
+.modal__contactMe > .plain_panel > .section__description h3 {
+    font-size: x-large;
+    padding: 5px;
+}
+
+.modal__howToUse > .plain_panel > .section__description details:last-child p:last-child {
+    margin-bottom: 0;
+}
+
+@media screen and (max-width: 600px) {
+    /* Title dialog modal */
+    .d--modal > .plain_panel > .section__title {
+        font-size: 3.5rem;
+        margin-bottom: 0;
+        margin-top: 25px;
+        text-align: center;
+    }
+
+    .d--modal > .plain_panel .section__description {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .d--modal .captcha--box__display button {
+        font-size: 35px;
+    }
+
+    /* How To Use Modal */
+    .modal > .plain_panel > .section__title {
+        font-size: 4.4rem;
+        margin-bottom: 0;
+    }
+
+    /* Button Model */
+    .button__model {
+        height: 100px;
+        width: 100px;
+        font-size: 1.6rem;
+    }
+
+    /* Pop-Up Message */
+    .popup_message {
+        font-size: medium;
+    }
+
+    .popup_close_button::after {
+        width: 25px;
+        height: 25px;
+        font-size: 2rem;
+        bottom: calc(50% - 12px);
+    }
+
+    /* BUTTONS TOP MAIN */
+    .edit-button_box > button {
+        font-size: small;
+    }
+
+    /* MODAL IMAGES */
+    .d--modal > .plain_panel > .section__description > .button--container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .d--modal > .plain_panel > .section__description > .button--container > .close__dialog {
+        position: absolute;
+        right: 10px;
+    }
+
+    /* ADD STOCK */
+    .modal > .plain_panel {
+        height: 90%;
+        align-items: center;
+        justify-content: center;
+        padding-right: 0;
+        padding-left: 40px;
+    }
+
+    .modal__addStock > .plain_panel > .section__description {
+        width: 100%;
+        max-height: 450px;
+    }
+
+    .form__addStock-content {
+        padding-bottom: 30px;
+    }
+    
+    #form__stock-add label {
+        font-size: 2rem;
+    }
+
+    #form__stock-add .upload-file__interfaz,
+    #form__stock-add input[type="text"] {
+        margin-left: 15px;
+        width: 80%;
+    }
+
+    .back-arrow {
+        bottom: 30px;
+        left: 30px;
+    }
+
+    .form__addStock-content .button__model {
+        bottom: -25px;
+        right: -25px;
+    }
+
+}
+
+@media screen and (max-width: 420px) {
+    
+    /* DIALOG MODAL */
+    .d--modal .captcha--box__display button {
+        font-size: 30px;
+    }
+
+    /* How To Use Modal */
+    .modal > .plain_panel > .section__title {
+        font-size: 4rem;
+    }
+
+    /* Button Model */
+    .button__model {
+        height: 90px;
+        width: 90px;
+        font-size: 1.4rem;
+    }
+
+    /* MAIN */
+    input:-webkit-autofill:hover, 
+    .section__login .section__description > form input::placeholder, 
+    .section__login .section__description > form input:not(:focus), 
+    .section__login .section__description > form input:focus, 
+    .section__signup .section__description > form input::placeholder, 
+    .section__signup .section__description > form input:not(:focus), 
+    .section__signup .section__description > form input:focus {
+        font-size: 1.5rem;
+    }
+
+    /* Pop-Up Message */
+    .popup_message {
+        font-size: small;
+    }
+
+    .popup_close_button::after {
+        width: 20px;
+        height: 20px;
+        font-size: 1.6rem;
+        bottom: calc(50% - 10px);
+    }
+
+    /* BUTTONS TOP MAIN */
+    .edit-button_box > button {
+        font-size: small;
+    }
+
+    .edit-button_box > button .principal--text {
+        display: none;
+    }
+
+    .edit-button_box > button .auxiliar--icon {
+        display: inline-block;
+    }
+
+    /* MODAL EDIT PRODUCT */
+    .dialog--modal {
+        left: calc(50% - 40%);
+        width: 80%;
+    }
+
+    /* MODAL IMAGES */
+    .d--modal > .plain_panel {
+        padding-right: 0;
+        padding-left: 10px;
+    }
+
+    /* ADD STOCK */
+    .form__addStock-content .button__model {
+        bottom: -25px;
+        right: -25px;
+    }
+
+    .form__addStock-content .button__optional-columns {
+        right: 5px;
+        top: 0;
+    }
+
+    #form__stock-add > .form__optional_step label:first-child,
+    #form__stock-add > .form__second_step label:first-child {
+        margin-top: 40px;
+    }
+}
+
+
+@media screen and (max-width: 345px) {
+    /* Title dialog modal */
+    .d--modal > .plain_panel > .section__title {
+        font-size: 2.8rem;
+        margin-bottom: 0;
+        margin-top: 25px;
+        text-align: center;
+    }
+
+    /* How To Use Modal */
+    .modal > .plain_panel > .section__title {
+        font-size: 3.8rem;
+    }
+
+    /* Button Model */
+    .button__model {
+        height: 80px;
+        width: 80px;
+        font-size: 1.2rem;
+    }
+
+    /* Footer */
+    footer > ul > li {
+        padding-left: 20px;
+    }
+
+    /* MAIN */
+    input:-webkit-autofill:hover, 
+    .section__login .section__description > form input::placeholder, 
+    .section__login .section__description > form input:not(:focus), 
+    .section__login .section__description > form input:focus, 
+    .section__signup .section__description > form input::placeholder, 
+    .section__signup .section__description > form input:not(:focus), 
+    .section__signup .section__description > form input:focus {
+        font-size: 1.3rem;
+    }
+}

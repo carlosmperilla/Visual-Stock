@@ -1,0 +1,69 @@
+:root {
+    --nav_bg_color: rgba(0, 0, 0, 0.15);
+    --nav_blur_weight: 2px;
+    --nav_color: #555;
+    --nav_color_hover: #777;
+    --interactive-icon_hover: rgb(187 147 93);
+    --date_shadow: rgb(104, 71, 0);
+    --text_color: #444; 
+    --text_color_button: #ccc;
+    --bright_button: 0.8;
+    --button_shadow: #999;
+    --button_shadow_hover: #777;
+    --modal_bg_color: rgba(168, 67, 0, 0.15);
+    --bright_modal: 0.8;
+    --modal_blur_weight: 5px;
+    --plain-panel_bg_color: #ddd;
+    --button_guests_color_layer: rgba(255, 184, 3, 0.5);
+    --button_signup_color_layer: rgba(14, 213, 77, 0.5);
+    --button_login_color_layer: rgba(107, 164, 207, 0.5);
+    --button_close_color_layer: rgba(247, 102, 41, 0.5);
+    --button_addStock_color_layer: rgba(142, 104, 57, 0.52);
+    --form_error_color: rgb(136, 7, 7);
+    --popup_success-message_bg_color: rgba(0,217,12,0.4);
+    --popup_info-message_bg_color: rgba(0,121,217,0.4);
+    --popup_error-message_bg_color: rgba(217, 145, 0, 0.4);
+    --popup_warning-message_bg_color: rgba(217, 0, 0, 0.4);
+    --stock-card__color: #2c2514;
+    --add_button__color: rgb(255, 246, 246);
+    --add_stock_modal_bg: rgb(101, 70, 13, 0.43);
+    --add_stock_input_text: rgb(74 64 29);
+    --add_stock_input_bg: rgba(192, 192, 192, 0.278);
+    --add_stock_input_bright: 1.2;
+    --select_file_bg: rgb(167, 143, 99);
+    --delete_button_bg: #ff1e1e;
+    --edit_button_bg: rgb(140, 208, 8);
+    --delete_password_bg: rgba(192, 192, 192, 0.69);
+    --delete_password_placeholder: rgb(105, 95, 95);
+    --delete_endButton_bg: rgb(142 29 29);
+    --edit_endButton_bg: rgb(53, 142, 29);
+    --delete_endButton_color: rgb(58 38 38);
+    --edit_endButton_color: rgb(38, 58, 54);
+    --table_even_row_bg: #bbb;
+    --table-thead_bg: rgba(167, 124, 99, 0.74);
+    --table-card-border: rgb(70 43 4);
+    --table-card-body: #dca463f2;
+    --table-card-quantity: #dc8c30f2;
+    --table-card-name: rgba(167, 124, 99, 0.47);
+    --table-edit-border: #a53c00;
+    --h3-bg-color: #ffb4002b;
+    --fiter--button_bg: rgb(22 173 153);
+    --selection--color: cornsilk;
+    --selection--bg_color: goldenrod;
+  }
+
+::backdrop {
+  --modal_bg_color: rgba(168, 67, 0, 0.15);
+  --bright_modal: 0.8;
+  --modal_blur_weight: 5px;
+}
+
+::selection {
+  --selection--color: cornsilk;
+  --selection--bg_color: goldenrod;
+}
+
+
+body {
+    background-image: url("../imgs/background_pattern_light.jpg");
+}
