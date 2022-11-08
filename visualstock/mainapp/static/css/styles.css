@@ -2270,12 +2270,12 @@ table td[contenteditable]:focus {
     border-radius: 0 25px 25px 0;
 }
 
-.d--modal .captcha--box__display button:active,
-.d--modal .captcha--box__display button:hover {
+.d--modal .captcha--box__display button.enabled:active,
+.d--modal .captcha--box__display button.enabled:hover {
     filter: brightness(var(--add_stock_input_bright));
 }
 
-.d--modal .captcha--box__display button:active {
+.d--modal .captcha--box__display button.enabled:active {
     transform: scale(0.99);
 }
 
@@ -2284,7 +2284,7 @@ table td[contenteditable]:focus {
     transition: 300ms all ease;
 }
 
-.d--modal .captcha--box__display button:active > .icon-loop2 {
+.d--modal .captcha--box__display button.enabled:active > .icon-loop2 {
     transform: rotate(360deg);
 }
 

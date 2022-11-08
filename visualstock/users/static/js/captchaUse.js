@@ -7,6 +7,7 @@ const captchaInput = document.querySelector(".captcha--box__input input[type='te
 const captchaSend = document.querySelector(".captcha--box__input button");
 const signupForm = document.getElementById('form__signup');
 const hiddenCaptcha = signupForm.querySelector("input[name='captcha']");
+const renewCaptchaButton = document.getElementById("renew-captcha__button");
 
 function getCookie(name) {
     let cookieValue = null;
@@ -79,14 +80,23 @@ function renewCaptcha(){
         }
             );
 
+    renewCaptchaButton.disabled = true;
+    renewCaptchaButton.style.filter = "grayscale(1)";
+    renewCaptchaButton.classList.remove("enabled");
    
 
     (async () => {
         const rawResponse = await fetch(request);
         const content = await rawResponse.json();
-
-        captchaImg.src = content.captcha_img;
-        restartCounter();
+        setTimeout(
+            () => {
+                captchaImg.src = content.captcha_img;
+                restartCounter();
+                renewCaptchaButton.disabled = "";
+                renewCaptchaButton.style.filter = "";
+                renewCaptchaButton.classList.add("enabled");
+            }, 1000
+        );
 
         }
     )();
