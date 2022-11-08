@@ -228,8 +228,8 @@
         </div>
         <form style="display: none;" id="form__guests" action="{% url 'login' %}" method="post">
             {% csrf_token %}
-            <input type="text" name="username" id="id_username" value="Invitados">
-            <input type="password" name="password" id="id_password" value="contraseña_invitados">
+            <input type="text" name="username" id="id_username-guests" value="Invitados">
+            <input type="password" name="password" id="id_password-guests" value="contraseña_invitados">
         </form>
     {% endif %}
 </div>
