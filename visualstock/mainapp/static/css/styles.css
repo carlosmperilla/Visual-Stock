@@ -39,6 +39,7 @@ body {
                          "footer";
     grid-template-columns: 100%;
     grid-template-rows: 60px minmax(calc(100% - 97px), 1fr) 37px;
+    transition: 200ms all ease-in-out;
 }
 
 header {
