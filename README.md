@@ -27,7 +27,7 @@ git clone https://github.com/carlosmperilla/Visual-Stock.git
 cd Visual-Stock
 python -m venv vs-env
 vs-env\Scripts\activate
-pip install -r requirements
+pip install -r requirements.txt
 cd visualstock
 python -m manage runserver 0.0.0.0:8000
 ```
