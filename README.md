@@ -26,7 +26,7 @@ Ejecutando el siguiente script se puede probar el funcionamiento en local.
 git clone https://github.com/carlosmperilla/Visual-Stock.git
 cd Visual-Stock
 python -m venv vs-env
-stock-env\Scripts\activate
+vs-env\Scripts\activate
 pip install -r requirements
 cd visualstock
 python -m manage runserver 0.0.0.0:8000
