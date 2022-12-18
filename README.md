@@ -4,6 +4,7 @@ Una aplicación para la visualización dinámica de tablas de productos.
 - Permite visualizar stocks de productos, gastos, etcétera en formato tanto de tabla, como de tarjetas.
 - Permite una edición rápida de los datos críticos, añadir imágenes guía para los productos, eliminar productos innecesarios.
 - Además de contar con un sistema de restauración de cambios. El acceso a los múltiples stocks por usuario es práctico y dinámico
+- Las imagenes se comprimen para ahorrar espacio y hacer más rapida el envio de las mismas al usuario.
 
 ## URL Para probar la aplicación web
 http://carlosprogramacion.pythonanywhere.com/
